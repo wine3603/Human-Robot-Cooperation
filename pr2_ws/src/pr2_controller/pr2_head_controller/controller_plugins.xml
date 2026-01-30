@@ -1,0 +1,7 @@
+<library path="pr2_head_controller">
+    <class name="pr2_head_controller/Pr2HandController" type="pr2_head_controller::Pr2HandController" base_class_type="controller_interface::ControllerInterface">
+        <description>
+            This controller provides an interface to (re-)activate the Pr2 head.
+        </description>
+    </class>
+</library>

@@ -1,0 +1,178 @@
+<?xml version="1.0" ?>
+<robot name="M300_E5" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find moying_mcr_description)/urdf/materials.xacro"/>
+  <xacro:include filename="$(find moying_mcr_description)/urdf/d435.urdf.xacro"/>
+  <xacro:property name="PI" value="3.1415926535897932"/>
+  <xacro:macro name="cuboid_inertia_def" params="x y z mass">
+    <inertia iyy="${mass*(z*z+x*x)/12.0}" ixx="${mass*(y*y+z*z)/12.0}" izz="${mass*(x*x+y*y)/12.0}" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </xacro:macro>
+  <xacro:macro name="cylinder_inertia_def" params="r h mass">
+    <inertia ixx="${mass*(3*r*r+h*h)/12}" ixy="0" ixz="0" iyy="${mass*(3*r*r+h*h)/12}" iyz="0" izz="${mass*r*r/2}"/>
+  </xacro:macro>
+  <xacro:macro name="body" params="parent">
+    <!-- Body -->
+    <joint name="body_base_joint" type="fixed">
+      <origin
+          xyz="0.27 0 0.78"
+          rpy="0 0 0" />
+      <parent link="${parent}"/>
+      <child link="body_base"/>
+    </joint>
+
+    
+    <link name="body_base">
+      <inertial>
+        <mass value="1"/>
+        <origin rpy="0 0 0" xyz="0 0 0.1 "/>
+        <xacro:cylinder_inertia_def r="0.05" h="0.2" mass="1"/>
+      </inertial>
+      <visual>
+        <origin rpy="${pi/2} 0 ${-pi/2}" xyz="0 0 0 "/>
+        <geometry>
+          <mesh filename="package://moying_mcr_description/meshes/Body_base.STL"/>
+        </geometry>
+        <material name="white"/>
+      </visual>
+      <collision>
+        <origin rpy="0 0 ${-pi/2}" xyz="0 0 0.3"/>
+        <geometry>
+          <cylinder length="0.4" radius="0.14"/>
+        </geometry>
+      </collision>
+    </link>
+    
+    <joint name="body_joint" type="fixed">    <!-- Extention shell -->
+      <parent link="body_base"/>
+      <child link="body"/>
+      <axis
+        xyz="0 0 1" />
+      <limit
+        lower="-3.16"
+        upper="3.16"
+        effort="104"
+        velocity="1.57" />
+    </joint>
+    
+    <link name="body">
+      <inertial>
+        <mass value="5"/>
+        <origin rpy="0 0 0" xyz="0 0 0.22 "/>
+        <!-- <inertia ixx="3128e-9" ixy="0.0" ixz="0.0" iyy="3128e-9" iyz="0.0" izz="3128e-9"/> -->
+        <xacro:cuboid_inertia_def x="0.3" y="0.3" z="0.4" mass="5"/>
+      </inertial>
+      <visual>
+        <origin rpy="0 0 ${pi/2}" xyz="0 0 0 "/>
+        <geometry>
+          <mesh filename="package://moying_mcr_description/meshes/Body.STL" />
+        </geometry>
+        <material name="white"/>
+      </visual>
+      <!-- <collision>
+        <origin rpy="0 0 ${pi/2}" xyz="0 0 0"/>
+        <geometry>
+          <mesh filename="package://moying_mcr_description/meshes/Body.STL" />
+        </geometry>
+      </collision> -->
+    </link>
+
+
+
+    <!-- Manipulators -->
+
+    <link name="right_arm_base"/>
+    <joint name="right_arm_base_joint" type="fixed">
+      <origin xyz="0 -0.087 0.390" rpy="${PI/2} ${PI/2} 0" />
+      <parent link="body"/>
+      <child link="right_arm_base"/>
+      <axis xyz="0 0 1" />
+    </joint>
+
+    <link name="left_arm_base"/>
+    <joint name="left_arm_base_joint" type="fixed">
+      <origin xyz="0 0.087 0.390" rpy="${-PI/2} ${PI/2} 0" />
+      <parent link="body"/>
+      <child link="left_arm_base"/>
+      <axis xyz="0 0 1" />
+    </joint>
+
+    <!-- Head -->
+    <joint name="head_joint1" type="revolute">
+      <origin
+          xyz="0 0 0.541"
+          rpy="0 0 0" />
+      <parent link="body"/>
+      <child link="head_base"/>
+      <axis
+        xyz="0 0 -1" />
+      <limit
+        lower="${-pi/3}"
+        upper="${pi/3}"
+        effort="10"
+        velocity="1.57" />
+    </joint>
+
+    <link name="head_base">
+      <inertial>
+        <mass value="1"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <xacro:cuboid_inertia_def x="0.1" y="0.1" z="0.1" mass="1"/>
+      </inertial>
+      <visual>
+        <origin rpy="0 0 ${pi/2}" xyz="0 0 0"/>
+        <geometry>
+          <mesh filename="package://moying_mcr_description/meshes/humoyoid/YF14_Head_base.stl"/>
+        </geometry>
+        <material name="white"/>
+      </visual>
+      <!-- <collision>
+        <origin rpy="0 0 ${pi/2}" xyz="0 0 0"/>
+        <geometry>
+          <mesh filename="package://moying_mcr_description/meshes/humoyoid/YF14_Head_base.stl"/>
+        </geometry>
+      </collision> -->
+    </link>
+
+    <joint name="head_joint2" type="revolute">
+      <origin
+          xyz="0 0.022 0"
+          rpy="0 0 0" />
+      <parent link="head_base"/>
+      <child link="head"/>
+      <axis
+        xyz="0 -1 0" />
+      <limit
+        lower="${-pi*7/36}"
+        upper="${pi*7/36}"
+        effort="10"
+        velocity="1.57" />
+    </joint>
+
+    <link name="head">
+      <inertial>
+        <mass value="1"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <xacro:cuboid_inertia_def x="0.1" y="0.1" z="0.1" mass="1"/>
+      </inertial>
+      <visual>
+        <origin rpy="${pi/2} 0 ${pi}" xyz="0 0 0"/>
+        <geometry>
+          <mesh filename="package://moying_mcr_description/meshes/humoyoid/YF14_Head.stl"/>
+        </geometry>
+        <material name="white"/>
+      </visual>
+      <!-- <collision>
+        <origin rpy="${pi/2} 0 ${pi}" xyz="0 0 0"/>
+        <geometry>
+          <mesh filename="package://moying_mcr_description/meshes/humoyoid/YF14_Head.stl"/>
+        </geometry>
+      </collision> -->
+    </link>
+
+    <!-- Attach the RealSense D435 -->
+    <xacro:sensor_d435 parent="body_base" prefix="head_camera">
+        <origin xyz="0.0 0.0 0.72" rpy="0 0.28 0"/>
+    </xacro:sensor_d435>
+  </xacro:macro>
+
+</robot>

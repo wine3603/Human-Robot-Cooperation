@@ -1,0 +1,9 @@
+<library path="pr2_mujoco_hardware">
+  <class name="pr2_mujoco_hardware/Pr2MujocoHardware"
+         type="pr2_mujoco_hardware::Pr2MujocoHardware"
+         base_class_type="hardware_interface::SystemInterface">
+    <description>
+      Hardware interface fcr MCR in MuJoCo simulation.
+    </description>
+  </class>
+</library>

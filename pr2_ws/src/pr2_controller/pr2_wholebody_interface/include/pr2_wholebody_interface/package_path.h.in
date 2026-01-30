@@ -1,0 +1,13 @@
+#pragma once
+
+#include <cstddef>
+#include <string>
+
+namespace pr2_wholebody_interface {
+
+/** Gets the path to the package source directory. */
+inline std::string getPath() {
+  return "@PROJECT_SOURCE_DIR@";
+}
+
+}  // namespace mobile_manipulator

@@ -1,0 +1,185 @@
+# Copyright (c) 20224 Stogl Robotics Consulting UG (haftungsbeschränkt)
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+#
+# Source of this file are templates in
+# [RosTeamWorkspace](https://github.com/StoglRobotics/ros_team_workspace) repository.
+#
+# Author: Dr. Denis
+#
+
+/pr2/controller_manager:
+  ros__parameters:
+    update_rate: 1000  # Hz
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    left_gripper_controller:
+      type: pr2_gripper_controller/Pr2GripperController
+    right_gripper_controller:
+      type: pr2_gripper_controller/Pr2GripperController
+    pr2_head_controller:
+      type: pr2_head_controller/Pr2HandController   
+    pr2_omni_controller:
+      type: pr2_omni_controller/OmniController
+    pr2_arm_velocity_controller:
+      type: pr2_arm_velocity_controller/Pr2armVelocityController
+    pr2_wholebody_controller:
+      type: pr2_wholebody_controller/PR2WBCController
+    pr2_arm_trajectory_controller:
+      type: velocity_controllers/JointGroupVelocityController
+
+
+/pr2/joint_state_broadcaster:
+  ros__parameters:
+    update_rate: 100 #Hz
+    
+/pr2/left_gripper_controller:
+  ros__parameters:
+    joy_topic_name: /mcr/joy
+    joint_name: l_gripper_l_finger_joint
+    control_key: 5
+/pr2/right_gripper_controller:
+  ros__parameters:
+    joy_topic_name: /mcr/joy
+    joint_name: r_gripper_l_finger_joint
+    control_key: 5
+
+/pr2/pr2_head_controller:
+  ros__parameters:
+    joy_topic_name: /mcr/joy
+
+/pr2/pr2_omni_controller:
+  ros__parameters:
+    # steer joints (caster rotation)
+    steer_joints:
+      - fl_caster_rotation_joint
+      - fr_caster_rotation_joint
+      - bl_caster_rotation_joint
+      - br_caster_rotation_joint
+    # left wheel joints within each caster
+    wheel_left_joints:
+      - fl_caster_l_wheel_joint
+      - fr_caster_l_wheel_joint
+      - bl_caster_l_wheel_joint
+      - br_caster_l_wheel_joint
+    # right wheel joints within each caster
+    wheel_right_joints:
+      - fl_caster_r_wheel_joint
+      - fr_caster_r_wheel_joint
+      - bl_caster_r_wheel_joint
+      - br_caster_r_wheel_joint
+
+    # geometry (from URDF)
+    wheel_diameter: 0.149584        # 2 * 0.074792
+    wheel_track: 0.098              # 0.049 - (-0.049)
+    wheelbase_x: 0.2246             # caster origin x magnitude
+    wheelbase_y: 0.2246             # caster origin y magnitude
+
+    # anti-jitter threshold
+    min_steer_speed: 0.01           # m/s (tunable)
+    max_vx: 0.8      # m/s
+    max_vy: 0.8      # m/s
+    max_wz: 1.0      # rad/s (URDF caster rotation joint limit velocity=10)
+    
+/pr2/pr2_arm_velocity_controller:
+  ros__parameters:
+    update_rate: 1000 # Hz
+
+    joints:
+      - torso_lift_joint
+      - l_shoulder_pan_joint
+      - l_shoulder_lift_joint
+      - l_upper_arm_roll_joint
+      - l_elbow_flex_joint
+      - l_forearm_roll_joint
+      - l_wrist_flex_joint
+      - l_wrist_roll_joint
+      - r_shoulder_pan_joint
+      - r_shoulder_lift_joint
+      - r_upper_arm_roll_joint
+      - r_elbow_flex_joint
+      - r_forearm_roll_joint
+      - r_wrist_flex_joint
+      - r_wrist_roll_joint
+
+    urdf_package: "pr2_description"
+    urdf_path: "/urdf/pr2_arm_only.urdf"   # 你提供的只含这15DoF的URDF
+
+    left_end_link_name: left_gripper_tool_frame
+    right_end_link_name: right_gripper_tool_frame
+
+    # 可选：如果你后面还要补偿末端挂载质量（暂时不用就 0.0）
+    gripper_mass: 0.0
+
+    # 15维力矩限幅
+    effort_limit: [10000.0, 30.0, 200.0, 100.0, 100.0, 30.0, 30.0, 10.0, 30.0, 200.0, 100.0, 100.0, 30.0, 30.0, 10.0]
+
+
+    kp: [2000.0, 4.0, 10.0, 5.0, 2.5, 1.5, 1.5, 1.0, 4.0, 10.0, 5.0, 2.5, 1.5, 1.5, 1.0]
+    ki: [1000.0, 0.0, 10.50, 10.0, 0.0, 0.0, 0.0, 0.0, 0.0, 10.50, 10.0, 0.0, 0.0, 0.0, 0.0]
+    kd: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    ki_max: [200.0, 5.0, 20.0, 10.0, 10.0, 3.0, 3.0, 1.0, 5.0, 20.0, 10.0, 10.0, 3.0, 3.0, 1.0]
+
+
+/pr2/pr2_arm_trajectory_controller:
+  ros__parameters:
+    joints:
+      - pr2_arm_velocity_controller/torso_lift_joint
+      - pr2_arm_velocity_controller/l_shoulder_pan_joint
+      - pr2_arm_velocity_controller/l_shoulder_lift_joint
+      - pr2_arm_velocity_controller/l_upper_arm_roll_joint
+      - pr2_arm_velocity_controller/l_elbow_flex_joint
+      - pr2_arm_velocity_controller/l_forearm_roll_joint
+      - pr2_arm_velocity_controller/l_wrist_flex_joint
+      - pr2_arm_velocity_controller/l_wrist_roll_joint
+      - pr2_arm_velocity_controller/r_shoulder_pan_joint
+      - pr2_arm_velocity_controller/r_shoulder_lift_joint
+      - pr2_arm_velocity_controller/r_upper_arm_roll_joint
+      - pr2_arm_velocity_controller/r_elbow_flex_joint
+      - pr2_arm_velocity_controller/r_forearm_roll_joint
+      - pr2_arm_velocity_controller/r_wrist_flex_joint
+      - pr2_arm_velocity_controller/r_wrist_roll_joint
+
+/pr2/pr2_wholebody_controller:
+  ros__parameters:
+    update_rate: 100 #Hz
+    joints:
+      - torso_lift_joint
+      - l_shoulder_pan_joint
+      - l_shoulder_lift_joint
+      - l_upper_arm_roll_joint
+      - l_elbow_flex_joint
+      - l_forearm_roll_joint
+      - l_wrist_flex_joint
+      - l_wrist_roll_joint
+      - r_shoulder_pan_joint
+      - r_shoulder_lift_joint
+      - r_upper_arm_roll_joint
+      - r_elbow_flex_joint
+      - r_forearm_roll_joint
+      - r_wrist_flex_joint
+      - r_wrist_roll_joint
+    interface_name: velocity
+    robot_name: pr2
+    use_gui_target: false
+    task_package_name: "pr2_bringup"
+    task_file: "/config/task.info"
+    urdf_package_name: "pr2_description"
+    urdf_file: "/urdf/pr2_arm_only.urdf"
+    lib_package_name: "pr2_bringup"
+    lib_folder: "/auto_generated"
+    use_chain_interface: true
+    chain_velocity_interface_name: pr2_arm_velocity_controller

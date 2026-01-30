@@ -1,0 +1,7 @@
+<library path="moying_mcr_gripper_controller">
+    <class name="moying_mcr_gripper_controller/RobotiqActivationController" type="robotiq_controllers::RobotiqActivationController" base_class_type="controller_interface::ControllerInterface">
+        <description>
+            This controller provides an interface to (re-)activate the Robotiq gripper.
+        </description>
+    </class>
+</library>

@@ -1,0 +1,317 @@
+;robot model meta-information
+model_information {
+  removeJoints {
+    [0]   "head_joint1"
+    [1]   "head_joint2"
+    [2]   "forward_left_wheel_joint"
+    [3]   "forward_right_wheel_joint"
+    [4]   "back_left_wheel_joint"
+    [5]   "back_right_wheel_joint"
+  }
+  baseFrame         "base_link"
+  eleFrame          "left_arm_elfin_end_link"
+  ereFrame          "right_arm_elfin_end_link"
+}
+model_settings
+{
+  usePreComputation               false
+  recompileLibraries              true
+}
+
+; DDP settings
+ddp
+{
+  algorithm                       SLQ
+
+  nThreads                        4 
+  threadPriority                  20
+
+  maxNumIterations                1
+  minRelCost                      0.1
+  constraintTolerance             1e-3
+
+  displayInfo                     false
+  displayShortSummary             false
+  checkNumericalStability         false
+  debugPrintRollout               false
+  debugCaching                    false
+
+  AbsTolODE                       1e-3
+  RelTolODE                       1e-2
+  maxNumStepsPerSecond            10000
+  timeStep                        1e-2
+  backwardPassIntegratorType      ODE45
+
+  constraintPenaltyInitialValue   20.0
+  constraintPenaltyIncreaseRate   2.0
+
+  preComputeRiccatiTerms          true
+
+  useFeedbackPolicy               true
+
+  strategy                        LINE_SEARCH
+  lineSearch
+  {
+    minStepLength                 1e-2
+    maxStepLength                 1.0
+    hessianCorrectionStrategy     DIAGONAL_SHIFT
+    hessianCorrectionMultiple     1e-3
+  }
+}
+
+; Rollout settings
+rollout
+{
+  AbsTolODE                       1e-5
+  RelTolODE                       1e-4
+  timeStep                        1e-2
+  integratorType                  ODE45
+  maxNumStepsPerSecond            100000
+  checkNumericalStability         false
+}
+
+; MPC settings
+mpc
+{
+  timeHorizon                     0.35  ; [s]
+  solutionTimeWindow              0.3   ; [s]
+  coldStart                       false
+  
+  debugPrint                      false
+
+  mpcDesiredFrequency             100   ; [Hz]
+  mrtDesiredFrequency             100   ; [Hz]
+}
+initialState
+{
+  endEffector
+  {
+    left_position
+    {
+      (0,0) -3.2;x
+      (1,0) -1.1;y
+      (2,0) 0.90;z
+    }
+    left_orientation
+    {
+      (0,0) -0.5;w
+      (1,0) 0.50;x
+      (2,0) -0.50;y
+      (3,0) -0.50;z
+    }
+    right_position
+    {
+      (0,0) -2.80;x
+      (1,0) -1.1;y
+      (2,0) 0.90;z
+    }
+    right_orientation
+    {
+      (0,0) -0.5;w
+      (1,0) 0.50;x
+      (2,0) -0.50;y
+      (3,0) -0.50;z
+    }
+    base_position
+    {
+      (0,0) -3.00;x
+      (1,0) -2.0;y
+      (2,0) 0.0;z
+    }
+    base_orientation;
+    {
+      (0,0) 0.707;w
+      (1,0) 0.0;x
+      (2,0) 0.0;y
+      (3,0) 0.707;z
+    }
+
+  }
+  base
+  {
+    (0,0) 0.0
+    (1,0) 0.0
+    (2,0) 0.0
+  }
+  leftArm
+  {
+    (0,0)   0.00       ; torso_lift_joint
+    (1,0)   0.00       ; r_shoulder_pan_joint
+    (2,0)   0.00     ; r_shoulder_lift_joint
+    (3,0)   0.00     ; r_upper_arm_roll_joint
+    (4,0)   0.000     ; r_elbow_flex_joint
+    (5,0)   0.000     ; r_forearm_roll_joint
+  }
+  rightArm
+  {
+    (0,0)   0.00       ; torso_lift_joint
+    (1,0)   0.00       ; r_shoulder_pan_joint
+    (2,0)   0.00     ; r_shoulder_lift_joint
+    (3,0)   0.00     ; r_upper_arm_roll_joint
+    (4,0)   0.000     ; r_elbow_flex_joint
+    (5,0)   0.000     ; r_forearm_roll_joint
+  }
+}
+inputCost
+{
+  R
+  {
+    base
+    {
+      (0,0) 15.5 ; forward velocity
+      (1,1) 18.5 ; turning velocity
+      (2,2) 10.5 ; turning velocity
+    }
+    leftarm
+    {
+        (0,0)  3.0  ; joint1 velocity
+        (1,1)  1.0  ; joint2 velocity
+        (2,2)  1.0  ; joint3 velocity
+        (3,3)  1.50  ; joint4 velocity
+        (4,4)  1.50  ; joint5 velocity
+        (5,5)  1.0  ; joint6 velocity
+    }
+    rightarm
+    {
+        (0,0)  3.0  ; joint1 velocity
+        (1,1)  1.0  ; joint2 velocity
+        (2,2)  1.0  ; joint3 velocity
+        (3,3)  1.50  ; joint4 velocity
+        (4,4)  1.50  ; joint5 velocity
+        (5,5)  1.0  ; joint6 velocity
+    }
+  }
+}
+
+endLeftEffector
+{
+  ; end effector quadratic penalty scaling
+  muPosition      80.0
+  muOrientation   40.0
+}
+
+finalEndLeftEffector
+{
+  muPosition      80.0
+  muOrientation   40.0
+}
+endRightEffector
+{
+  ; end effector quadratic penalty scaling
+  muPosition      80.0
+  muOrientation    40.0
+}
+
+finalEndRightEffector
+{
+  muPosition      80.0
+  muOrientation    40.0
+}
+
+endBase
+{
+  muPosition      60.0
+  muOrientation   80.0
+}
+
+selfCollision
+{
+  ; activate self-collision constraint
+  activate false
+
+  ; Self Collision pairs
+  collisionLinkPairs
+  {
+    [0] "right_arm_elfin_link6, left_arm_elfin_link6"
+    [1] "right_arm_elfin_link4, extention_shell"
+    [2] "right_arm_elfin_link2, body_base"
+    [3] "left_arm_elfin_link2, body_base"
+    [4] "left_arm_elfin_link4, extention_shell"
+  }
+
+  ; minimum distance allowed between the pairs
+  minimumDistance  0.1
+
+  ; relaxed log barrier mu
+  mu     1e-2
+
+  ; relaxed log barrier delta
+  delta  1e-3
+}
+jointPositionLimits
+{
+  ; activate constraint
+  activate true 
+
+  ; relaxed log barrier mu
+  mu      0.01
+
+  ; relaxed log barrier delta
+  delta   1e-3
+}
+
+jointVelocityLimits
+{
+  ; relaxed log barrier mu
+  mu      0.01
+
+  ; relaxed log barrier delta
+  delta   1e-3
+
+  lowerBound
+  {
+    ; velocity limits for the different types of arm base DOFs
+    base
+    {
+      (0,0)  -0.2 ; forward velocity
+      (1,0)  -0.2 ; turning velocity
+      (2,0)  -0.3 ; turning velocity
+    }
+
+    ; velocity limits for the arm DOFs
+    arm
+    {
+      (0,0)  -0.2    ; torso_lift_joint [m/s]
+      (1,0)  -0.3    ; r_shoulder_pan_joint [rad/s]
+      (2,0)  -0.3	   ; r_shoulder_lift_joint [rad/s]
+      (3,0)  -0.3	   ; r_upper_arm_roll_joint [rad/s]
+      (4,0)  -0.3	   ; r_elbow_flex_joint [rad/s]
+      (5,0)  -0.3	   ; r_forearm_roll_joint [rad/s]
+      (6,0)  -0.2    ; torso_lift_joint [m/s]
+      (7,0)  -0.3    ; r_shoulder_pan_joint [rad/s]
+      (8,0)  -0.3	   ; r_shoulder_lift_joint [rad/s]
+      (9,0)  -0.3	   ; r_upper_arm_roll_joint [rad/s]
+      (10,0)  -0.3	   ; r_elbow_flex_joint [rad/s]
+      (11,0)  -0.3	   ; r_forearm_roll_joint [rad/s]
+    }
+  }
+  upperBound
+  {
+    ; velocity limits for the different types of arm base DOFs
+    base
+    {
+      (0,0)  0.2 ; forward velocity
+      (1,0)  0.2 ; turning velocity
+      (2,0)  0.3 ; turning velocity
+    }
+
+    ; velocity limits for the arm DOFs
+    arm
+    {
+      (0,0)  0.200     ; torso_lift_joint [m/s]
+      (1,0)  0.30     ; r_shoulder_pan_joint [rad/s]
+      (2,0)  0.30	   ; r_shoulder_lift_joint [rad/s]
+      (3,0)  0.3000	   ; r_upper_arm_roll_joint [rad/s]
+      (4,0)  0.3000	   ; r_elbow_flex_joint [rad/s]
+      (5,0)  0.300	   ; r_forearm_roll_joint [rad/s]
+      (6,0)  0.200     ; torso_lift_joint [m/s]
+      (7,0)  0.30     ; r_shoulder_pan_joint [rad/s]
+      (8,0)  0.300	   ; r_shoulder_lift_joint [rad/s]
+      (9,0)  0.3000	   ; r_upper_arm_roll_joint [rad/s]
+      (10,0)  0.3000	   ; r_elbow_flex_joint [rad/s]
+      (11,0)  0.3000	   ; r_forearm_roll_joint [rad/s]
+    }
+  }
+}
+
+

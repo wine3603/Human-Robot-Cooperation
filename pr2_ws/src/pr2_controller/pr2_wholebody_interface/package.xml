@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>pr2_wholebody_interface</name>
+  <version>0.0.0</version>
+  <description>TODO: Package description</description>
+  <maintainer email="wangning_tfl@163.com">tfl</maintainer>
+  <license>TODO: License declaration</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+  <depend>ocs2_core</depend>
+  <depend>Boost</depend>
+  <depend>ocs2_self_collision</depend>
+  <depend>ocs2_pinocchio_interface</depend>
+  <depend>ocs2_robotic_assets</depend>
+  <depend>ocs2_robotic_tools</depend>
+  <depend>ocs2_ros_interfaces</depend>
+  <depend>ocs2_mpc</depend>
+  <depend>ocs2_ddp</depend>
+  <depend>ocs2_mobile_manipulator</depend>
+  <depend>hpp-fcl</depend>
+  <depend>angles</depend>
+  <depend>pinocchio</depend>
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

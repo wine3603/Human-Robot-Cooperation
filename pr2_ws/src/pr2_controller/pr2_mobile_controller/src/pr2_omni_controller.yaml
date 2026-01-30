@@ -1,0 +1,91 @@
+pr2_omni_controller:
+  steer_joints:
+    type: string_array
+    default_value: []
+    description: "Caster rotation joints (steer), commanded in position."
+    read_only: true
+    validation:
+      not_empty<>: null
+      unique<>: null
+
+  wheel_left_joints:
+    type: string_array
+    default_value: []
+    description: "Left wheel joints in each caster, commanded in velocity."
+    read_only: true
+    validation:
+      not_empty<>: null
+      unique<>: null
+
+  wheel_right_joints:
+    type: string_array
+    default_value: []
+    description: "Right wheel joints in each caster, commanded in velocity."
+    read_only: true
+    validation:
+      not_empty<>: null
+      unique<>: null
+
+  wheel_diameter:
+    type: double
+    default_value: 0.149584
+    description: "Wheel diameter [m]. Used to convert linear speed to wheel angular speed."
+    read_only: true
+    validation:
+      gt<>: [0.0]
+
+  wheel_track:
+    type: double
+    default_value: 0.098
+    description: "Distance between left and right wheel centers within one caster [m]."
+    read_only: true
+    validation:
+      gt<>: [0.0]
+
+  wheelbase_x:
+    type: double
+    default_value: 0.2246
+    description: "Caster rotation axis x offset magnitude from base_link origin [m]."
+    read_only: true
+    validation:
+      gt<>: [0.0]
+
+  wheelbase_y:
+    type: double
+    default_value: 0.2246
+    description: "Caster rotation axis y offset magnitude from base_link origin [m]."
+    read_only: true
+    validation:
+      gt<>: [0.0]
+
+  min_steer_speed:
+    type: double
+    default_value: 0.05
+    description: "If module planar speed is below this threshold [m/s], keep last steer angle to avoid jitter."
+    read_only: true
+    validation:
+      gt<>: [0.0]
+
+  max_vx:
+    type: double
+    default_value: 0.8
+    description: "Max linear x command [m/s]."
+    read_only: true
+    validation:
+      gt<>: [0.0]
+
+  max_vy:
+    type: double
+    default_value: 0.8
+    description: "Max linear y command [m/s]."
+    read_only: true
+    validation:
+      gt<>: [0.0]
+
+  max_wz:
+    type: double
+    default_value: 1.0
+    description: "Max yaw rate command [rad/s]."
+    read_only: true
+    validation:
+      gt<>: [0.0]
