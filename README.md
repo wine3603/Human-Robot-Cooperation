@@ -29,5 +29,6 @@ iros/
 ├── unitree_mujoco/     # Workspace for  simulation
 │   ├── model/          # XML models for MuJoCo physics engine
 │   └── src/            # Simulation control interfaces (C++/Python)
+│   └── ...
 │   └── README.md
 └── README.md
