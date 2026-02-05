@@ -1,0 +1,9 @@
+<library path="moying_mcr_hardware">
+  <class name="moying_mcr_hardware/ArmHardwareInterface"
+         type="moying_mcr_hardware::ArmHardwareInterface"
+         base_class_type="hardware_interface::SystemInterface">
+    <description>
+      ros2_control hardware interface.
+    </description>
+  </class>
+</library>

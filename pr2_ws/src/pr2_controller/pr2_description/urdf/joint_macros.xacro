@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- effort command + position/velocity/effort state -->
+  <xacro:macro name="pr2_effort_joint" params="joint_name">
+    <joint name="${joint_name}">
+      <command_interface name="effort"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+  </xacro:macro>
+
+  <!-- position command + position/velocity state -->
+  <xacro:macro name="pr2_position_joint" params="joint_name">
+    <joint name="${joint_name}">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+    </joint>
+  </xacro:macro>
+
+  <!-- velocity command + position/velocity state -->
+  <xacro:macro name="pr2_velocity_joint" params="joint_name">
+    <joint name="${joint_name}">
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+  </xacro:macro>
+
+</robot>

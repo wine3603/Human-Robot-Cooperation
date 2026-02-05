@@ -1,0 +1,201 @@
+#include<baichuan_arm_dynamics_models/elfin/elfin3_pose2_dynamics_model.h>
+
+
+namespace baichuan {
+
+namespace arm {
+
+namespace elfin{
+
+void Elfin3Pose2DynamicsModel::tau( double* tau_out, const double* parms, const double* q, const double* dq, const double* ddq )
+{
+  double x0 = -9.788*cos(q[0]);
+  double x1 = cos(q[1]);
+  double x2 = -dq[1];
+  double x3 = sin(q[1]);
+  double x4 = dq[0]*x3;
+  double x5 = ddq[0]*x1 + x2*x4;
+  double x6 = ddq[0]*x3;
+  double x7 = dq[0]*x1;
+  double x8 = -x7;
+  double x9 = x2*x8 + x6;
+  double x10 = -ddq[1];
+  double x11 = 9.788*sin(q[0]);
+  double x12 = -0.266*((x1)*(x1)) - 0.266*((x3)*(x3));
+  double x13 = -0.266*dq[1];
+  double x14 = x11 + x12*x6 + x13*x7;
+  double x15 = x12*x4;
+  double x16 = -parms[19];
+  double x17 = parms[20]*x7 + parms[22]*x15 + x16*x4;
+  double x18 = cos(q[2]);
+  double x19 = -dq[3];
+  double x20 = -x19;
+  double x21 = dq[2] + x2;
+  double x22 = cos(q[3]);
+  double x23 = x21*x22;
+  double x24 = sin(q[2]);
+  double x25 = x18*x4 + x24*x8;
+  double x26 = sin(q[3]);
+  double x27 = x25*x26;
+  double x28 = x23 - x27;
+  double x29 = -x24;
+  double x30 = x18*x7 + x24*x4;
+  double x31 = -dq[2];
+  double x32 = x18*x9 + x29*x5 + x30*x31;
+  double x33 = x22*x32;
+  double x34 = ddq[2] + x10;
+  double x35 = x26*x34;
+  double x36 = x20*x28 + x33 + x35;
+  double x37 = dq[2]*x25 + x18*x5 + x24*x9;
+  double x38 = -x37;
+  double x39 = -ddq[3] + x38;
+  double x40 = x22*x25;
+  double x41 = x21*x26;
+  double x42 = x40 + x41;
+  double x43 = x22*x34;
+  double x44 = -x26;
+  double x45 = x19*x42 + x32*x44 + x43;
+  double x46 = -0.266*ddq[1] + x0*x1;
+  double x47 = -x0*x3;
+  double x48 = x13*x24;
+  double x49 = x18*x46 + x29*x47 + x31*x48;
+  double x50 = -0.324*x26;
+  double x51 = x13*x18;
+  double x52 = x15*x22 - 0.324*x40 - 0.324*x41 + x44*x51;
+  double x53 = x14*x26 + x20*x52 + x22*x49 + x32*x50 + 0.324*x43;
+  double x54 = sin(q[4]);
+  double x55 = cos(q[4]);
+  double x56 = -x55;
+  double x57 = -x30;
+  double x58 = x19 + x57;
+  double x59 = x42*x54 + x56*x58;
+  double x60 = -dq[4];
+  double x61 = x36*x55 + x39*x54 + x59*x60;
+  double x62 = ddq[4] + x45;
+  double x63 = x42*x55 + x54*x58;
+  double x64 = dq[4]*x63 + x36*x54 + x39*x56;
+  double x65 = dq[2]*x51 + x18*x47 + x24*x46;
+  double x66 = -x65;
+  double x67 = x15*x26 + x22*x51 + 0.324*x23 - 0.324*x27;
+  double x68 = -x48;
+  double x69 = x54*x68 + x55*x67;
+  double x70 = dq[4]*x69 + x53*x54 + x56*x66;
+  double x71 = dq[4] + x28;
+  double x72 = -parms[59];
+  double x73 = parms[54]*x63 + parms[56]*x71 + parms[57]*x59 + parms[58]*x52 + x69*x72;
+  double x74 = cos(q[5]);
+  double x75 = x61*x74;
+  double x76 = sin(q[5]);
+  double x77 = x62*x76;
+  double x78 = x71*x74;
+  double x79 = x63*x76;
+  double x80 = x78 - x79;
+  double x81 = dq[5]*x80 + x75 + x77;
+  double x82 = x62*x74;
+  double x83 = -x76;
+  double x84 = x63*x74;
+  double x85 = x71*x76;
+  double x86 = x84 + x85;
+  double x87 = -dq[5];
+  double x88 = x61*x83 + x82 + x86*x87;
+  double x89 = ddq[5] + x64;
+  double x90 = dq[5] + x59;
+  double x91 = x52*x74 + x69*x83 - 0.1975*x84 - 0.1975*x85;
+  double x92 = x52*x76 + x69*x74 + 0.1975*x78 - 0.1975*x79;
+  double x93 = -parms[72];
+  double x94 = parms[67]*x86 + parms[69]*x80 + parms[70]*x90 + parms[71]*x91 + x92*x93;
+  double x95 = x54*x67 + x56*x68;
+  double x96 = -parms[71];
+  double x97 = parms[72]*x86 + parms[74]*x95 + x80*x96;
+  double x98 = x14*x22 + x19*x67 - 0.324*x33 - 0.324*x35 + x44*x49;
+  double x99 = x53*x55 + x54*x66 + x60*x95;
+  double x100 = x74*x98 - 0.1975*x75 - 0.1975*x77 + x83*x99 + x87*x92;
+  double x101 = -parms[73];
+  double x102 = parms[71]*x90 + parms[74]*x91 + x101*x86;
+  double x103 = -x102;
+  double x104 = parms[66]*x86 + parms[68]*x80 + parms[69]*x90 + parms[73]*x92 + x95*x96;
+  double x105 = parms[65]*x81 + parms[66]*x88 + parms[67]*x89 + parms[72]*x70 + x100*x101 + x103*x95 - x104*x90 + x80*x94 + x91*x97;
+  double x106 = -parms[58];
+  double x107 = parms[59]*x63 + parms[61]*x95 + x106*x71;
+  double x108 = -parms[60];
+  double x109 = parms[53]*x63 + parms[55]*x71 + parms[56]*x59 + parms[60]*x69 + x106*x95;
+  double x110 = -x59;
+  double x111 = parms[58]*x59 + parms[61]*x52 + x108*x63;
+  double x112 = -0.1975*x76;
+  double x113 = dq[5]*x91 + x112*x61 + x74*x99 + x76*x98 + 0.1975*x82;
+  double x114 = parms[73]*x80 + parms[74]*x92 + x90*x93;
+  double x115 = parms[65]*x86 + parms[66]*x80 + parms[67]*x90 + parms[72]*x95 + x101*x91;
+  double x116 = -x86;
+  double x117 = parms[66]*x81 + parms[68]*x88 + parms[69]*x89 + parms[73]*x113 + x114*x95 + x115*x90 + x116*x94 + x70*x96 - x92*x97;
+  double x118 = parms[73]*x88 + parms[74]*x113 + x103*x90 + x80*x97 + x89*x93;
+  double x119 = parms[71]*x89 + parms[74]*x100 + x101*x81 + x114*x90 + x116*x97;
+  double x120 = x119*x74;
+  double x121 = parms[52]*x61 + parms[53]*x62 + parms[54]*x64 + parms[59]*x70 + x105*x74 + x107*x52 + x108*x98 + x109*x110 - x111*x95 + x112*x118 + x117*x83 - 0.1975*x120 + x71*x73;
+  double x122 = -parms[47];
+  double x123 = parms[39]*x42 + parms[40]*x58 + parms[41]*x28 + parms[46]*x52 + x122*x68;
+  double x124 = -parms[46];
+  double x125 = parms[47]*x58 + parms[48]*x67 + x124*x28;
+  double x126 = -parms[45];
+  double x127 = -x80;
+  double x128 = parms[67]*x81 + parms[69]*x88 + parms[70]*x89 + parms[71]*x100 + x102*x92 + x104*x86 + x113*x93 - x114*x91 + x115*x127;
+  double x129 = parms[52]*x63 + parms[53]*x71 + parms[54]*x59 + parms[59]*x95 + x108*x52;
+  double x130 = -x71;
+  double x131 = parms[60]*x71 + parms[61]*x69 + x59*x72;
+  double x132 = -x52;
+  double x133 = parms[54]*x61 + parms[56]*x62 + parms[57]*x64 + parms[58]*x98 + x109*x63 + x111*x69 + x128 + x129*x130 + x131*x132 + x72*x99;
+  double x134 = parms[41]*x42 + parms[43]*x58 + parms[44]*x28 + parms[45]*x68 + x124*x67;
+  double x135 = -x42;
+  double x136 = parms[46]*x42 + parms[48]*x52 + x126*x58;
+  double x137 = -parms[40]*x36 - parms[42]*x39 - parms[43]*x45 - parms[47]*x53 - x121*x54 - x123*x28 - x125*x52 - x126*x98 - x133*x56 - x134*x135 + x136*x67;
+  double x138 = parms[27]*x25 + parms[29]*x21 + parms[30]*x30 + parms[32]*x68 + parms[34]*x51;
+  double x139 = -parms[34];
+  double x140 = parms[32]*x30 + parms[35]*x15 + x139*x25;
+  double x141 = parms[33]*x57 + parms[34]*x21 + parms[35]*x51;
+  double x142 = -x15;
+  double x143 = parms[26]*x25 + parms[27]*x21 + parms[28]*x30 + parms[33]*x48 + x139*x15;
+  double x144 = -x21;
+  double x145 = parms[28]*x32 + parms[30]*x34 + parms[31]*x37 + parms[32]*x14 - parms[33]*x49 + x137 + x138*x25 + x140*x51 + x141*x142 + x143*x144;
+  double x146 = parms[15]*x7 + parms[17]*x4 + parms[18]*x2 + parms[19]*x13;
+  double x147 = -parms[21];
+  double x148 = parms[19]*x2 + parms[21]*x8 + parms[22]*x13;
+  double x149 = parms[14]*x7 + parms[16]*x4 + parms[17]*x2 + parms[19]*x142;
+  double x150 = -x2;
+  double x151 = parms[32]*x144 + parms[33]*x25 + parms[35]*x48;
+  double x152 = parms[40]*x42 + parms[42]*x58 + parms[43]*x28 + parms[45]*x132 + parms[47]*x67;
+  double x153 = -x28;
+  double x154 = parms[45]*x28 + parms[48]*x68 + x122*x42;
+  double x155 = parms[39]*x36 + parms[40]*x39 + parms[41]*x45 + parms[46]*x98 + x121*x55 + x122*x66 + x132*x154 + x133*x54 + x134*x58 + x136*x68 + x152*x153;
+  double x156 = -x51;
+  double x157 = parms[28]*x25 + parms[30]*x21 + parms[31]*x30 + parms[32]*x15 + parms[33]*x156;
+  double x158 = -x63;
+  double x159 = x118*x74;
+  double x160 = parms[53]*x61 + parms[55]*x62 + parms[56]*x64 + parms[60]*x99 + x105*x76 + x106*x70 - x107*x69 + x112*x119 + x117*x74 + x129*x59 + x131*x95 + x158*x73 + 0.1975*x159;
+  double x161 = -x125;
+  double x162 = parms[41]*x36 + parms[43]*x39 + parms[44]*x45 + parms[45]*x66 - x123*x58 + x124*x53 + x152*x42 + x154*x67 + x160 + x161*x68;
+  double x163 = parms[60]*x62 + parms[61]*x99 + x107*x71 + x110*x111 + x119*x83 + x159 + x64*x72;
+  double x164 = parms[59]*x61 + parms[61]*x70 + parms[72]*x81 + parms[74]*x70 + x102*x86 + x106*x62 + x111*x63 + x114*x127 + x130*x131 + x88*x96;
+  double x165 = parms[47]*x39 + parms[48]*x53 + x124*x45 + x136*x58 + x153*x154 + x163*x55 + x164*x54;
+  double x166 = parms[46]*x36 + parms[48]*x98 + parms[58]*x64 + parms[61]*x98 + x107*x158 + x108*x61 + x118*x76 + x120 + x126*x39 + x131*x59 + x154*x42 + x161*x58;
+  double x167 = x166*x22;
+  double x168 = parms[26]*x32 + parms[27]*x34 + parms[28]*x37 + parms[33]*x65 + x138*x57 + x139*x14 + x140*x68 + x15*x151 + x155*x22 + x157*x21 + x162*x44 + x165*x50 - 0.324*x167;
+  double x169 = parms[20]*x150 + parms[21]*x4;
+  double x170 = parms[13]*x7 + parms[14]*x4 + parms[15]*x2 + parms[20]*x15 + x13*x147;
+  double x171 = -x25;
+  double x172 = -x169;
+  double x173 = x165*x22;
+  double x174 = parms[27]*x32 + parms[29]*x34 + parms[30]*x37 + parms[32]*x66 + parms[34]*x49 + x141*x48 + x143*x30 + x151*x156 + x155*x26 + x157*x171 + x162*x22 + x166*x50 + 0.324*x173;
+//
+  tau_out[0] = ddq[0]*parms[10] + ddq[0]*parms[3] + dq[0]*parms[11] + parms[12]*(((dq[0]) > 0) - ((dq[0]) < 0)) + parms[6]*x11 + parms[8]*x0 + x1*(parms[13]*x5 + parms[14]*x9 + parms[15]*x10 + parms[20]*x14 + x13*x17 + x142*x148 + x145*x18 + x146*x4 + x147*x46 + x149*x150 + x168*x29) + x12*x3*(parms[20]*x5 + parms[22]*x14 + parms[32]*x37 + parms[35]*x14 + x139*x32 + x141*x30 + x148*x7 + x151*x171 + x16*x9 + x165*x26 + x167 + x172*x4) + x3*(parms[14]*x5 + parms[16]*x9 + parms[17]*x10 + parms[21]*x47 + x14*x16 + x145*x24 + x146*x8 + x15*x169 + x168*x18 + x170*x2);
+  tau_out[1] = ddq[1]*parms[23] + dq[1]*parms[24] - parms[15]*x5 - parms[17]*x9 - parms[18]*x10 - 0.266*parms[19]*x10 - parms[19]*x46 + parms[20]*x47 - 0.266*parms[22]*x46 + parms[25]*(((dq[1]) > 0) - ((dq[1]) < 0)) - x13*x172 - 0.266*x147*x5 - x149*x7 - 0.266*x169*x2 - 0.266*x17*x8 + x170*x4 - x174 - 0.266*x18*(parms[33]*x38 + parms[34]*x34 + parms[35]*x49 + x140*x57 + x151*x21 + x166*x44 + x173) - 0.266*x24*(-parms[32]*x34 + parms[33]*x32 + parms[35]*x65 - parms[45]*x45 - parms[48]*x66 - x122*x36 - x125*x28 - x135*x136 + x140*x25 + x141*x144 - x163*x54 - x164*x56);
+  tau_out[2] = ddq[2]*parms[36] + dq[2]*parms[37] + parms[38]*(((dq[2]) > 0) - ((dq[2]) < 0)) + x174;
+  tau_out[3] = ddq[3]*parms[49] + dq[3]*parms[50] + parms[51]*(((dq[3]) > 0) - ((dq[3]) < 0)) + x137;
+  tau_out[4] = ddq[4]*parms[62] + dq[4]*parms[63] + parms[64]*(((dq[4]) > 0) - ((dq[4]) < 0)) + x160;
+  tau_out[5] = ddq[5]*parms[75] + dq[5]*parms[76] + parms[77]*(((dq[5]) > 0) - ((dq[5]) < 0)) + x128;
+//
+  return;
+}
+
+} // end namespace robot_dynamics
+}
+} // end namespace moying
+

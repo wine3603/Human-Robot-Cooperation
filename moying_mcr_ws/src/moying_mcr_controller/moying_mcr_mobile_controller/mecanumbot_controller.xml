@@ -1,0 +1,10 @@
+<library path="moying_mcr_mobile_controller">
+  <class name="mcr_mecanumbot_controller/MecanumbotDriveController"
+    type="debict::mecanumbot::controller::MecanumbotDriveController"
+    base_class_type="controller_interface::ControllerInterface"
+  >
+    <description>
+      Drive controller for mecanumbot
+    </description>
+  </class>
+</library>

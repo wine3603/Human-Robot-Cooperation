@@ -1,0 +1,85 @@
+<mujoco model="moying_scene">
+  <compiler angle="radian" meshdir="meshes/"/>
+  
+  <include file="robot_mcr.xml"/>
+
+  <asset>
+    <mesh name="MQ60" content_type="model/stl" file="MQ60.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="left_wheel" content_type="model/stl" file="left_wheel.STL" scale="1000 1000 1000"/>
+    <mesh name="right_wheel" content_type="model/stl" file="right_wheel.STL" scale="1000 1000 1000"/>
+    <mesh name="Body_base" file="Body_base.STL"/>
+    <mesh name="Body" file="Body.STL"/>
+    <mesh name="YF14_Head_base" file="YF14_Head_base.stl"/>
+    <mesh name="YF14_Head" file="YF14_Head.stl"/>
+    <mesh name="d435" file="d435.stl"/>
+    <mesh name="QS6005" content_type="model/stl" file="QS6005.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="CD6003" file="CD6003.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="elfin5_base" content_type="model/stl" file="elfin5_base.STL"/>
+    <mesh name="elfin5_link1" content_type="model/stl" file="elfin5_link1.STL"/>
+    <mesh name="elfin5_link2" content_type="model/stl" file="elfin5_link2.STL"/>
+    <mesh name="elfin5_link3" content_type="model/stl" file="elfin5_link3.STL"/>
+    <mesh name="elfin5_link4" content_type="model/stl" file="elfin5_link4.STL"/>
+    <mesh name="elfin5_link5" content_type="model/stl" file="elfin5_link5.STL"/>
+    <mesh name="elfin5_link6" content_type="model/stl" file="elfin5_link6.STL"/>
+    <mesh name="elfin3_base" file="elfin3_base.STL"/>
+    <mesh name="elfin3_link1" file="elfin3_link1.STL"/>
+    <mesh name="elfin3_link2" file="elfin3_link2.STL"/>
+    <mesh name="elfin3_link3" file="elfin3_link3.STL"/>
+    <mesh name="elfin3_link4" file="elfin3_link4.STL"/>
+    <mesh name="elfin3_link5" file="elfin3_link5.STL"/>
+    <mesh name="elfin3_link6" file="elfin3_link6.STL"/>
+    <mesh name="robotiq_ft300" content_type="model/stl" file="robotiq_ft300.STL"/>
+    <mesh name="robotiq_ft300-G-062-COUPLING_G-50-4M6-1D6_20181119" content_type="model/stl" file="robotiq_ft300-G-062-COUPLING_G-50-4M6-1D6_20181119.STL"/>
+    <mesh name="robotiq_2f_140_base_link" content_type="model/stl" file="robotiq_2f_140_base_link.stl"/>
+    <mesh name="robotiq_2f_140_outer_knuckle" content_type="model/stl" file="robotiq_2f_140_outer_knuckle.stl"/>
+    <mesh name="robotiq_2f_140_outer_finger" content_type="model/stl" file="robotiq_2f_140_outer_finger.stl"/>
+    <mesh name="robotiq_2f_140_inner_finger" content_type="model/stl" file="robotiq_2f_140_inner_finger.stl"/>
+    <mesh name="robotiq_2f_140_inner_knuckle" content_type="model/stl" file="robotiq_2f_140_inner_knuckle.stl"/>
+    <mesh name="robotiq_base" file="robotiq_base.stl"/>
+    <mesh name="left_knuckle" file="left_knuckle.stl"/>
+    <mesh name="right_knuckle" file="right_knuckle.stl"/>
+    <mesh name="left_finger" file="left_finger.stl"/>
+    <mesh name="right_finger" file="right_finger.stl"/>
+    <mesh name="left_inner_knuckle" file="left_inner_knuckle.stl"/>
+    <mesh name="right_inner_knuckle" file="right_inner_knuckle.stl"/>
+    <mesh name="left_finger_tip" file="left_finger_tip.stl"/>
+    <mesh name="right_finger_tip" file="right_finger_tip.stl"/>
+    <mesh name="wheel_left" file="wheel_left_base.STL"/>
+    <mesh name="wheel_right" file="wheel_right_base.STL"/>
+    <mesh name="roller" file="wheel_1.STL"/>
+    <material name="wood" rgba="0.6 0.4 0.2 1"/>
+    <material name="white" rgba="1 1 1 1"/>    
+
+    <texture type="skybox" file="meshes/desert.png" gridsize="3 4" gridlayout=".U..LFRB.D.." />
+    <texture name="plane" type="2d" builtin="checker" rgb1=".2 .3 .4" rgb2=".3 .4 .5" width="512" height="512" mark="cross" markrgb=".8 .8 .8" />
+    <material name="plane" reflectance="0.3" texture="plane" texrepeat="1 1" texuniform="true" />
+  </asset>
+
+  <worldbody>
+    <light directional="true" pos="0 0 30" dir="0 -0.5 -1"/>
+    <geom name="floor" pos="0 0 0" size="0 0 .25" type="plane" material="plane" condim="3" solref="0.001 0.01" solimp="0.9 0.95 0.001"/>
+
+    <body name="table/base_link" pos="-3.0 0.0 0.8" quat="0.7071 0 0 0.7071">
+      <freejoint/>
+      <body name="table"/>
+      <geom name="table_top" type="box" size="0.60 0.3 0.005" pos="0 0 -0.005"  contype="1" conaffinity="1" mass="4.8" material="wood"/>
+
+
+      <geom name="leg_fl" type="cylinder" size="0.025 0.395" pos="0.55 0.25 -0.40" material="white" mass="0.5"/>
+      <geom name="leg_fr" type="cylinder" size="0.025 0.395" pos="0.55 -0.25 -0.40" material="white" mass="0.5"/>
+      <geom name="leg_rl" type="cylinder" size="0.025 0.395" pos="-0.55 0.25 -0.40" material="white" mass="0.5"/>
+      <geom name="leg_rr" type="cylinder" size="0.025 0.395" pos="-0.55 -0.25 -0.40" material="white" mass="0.5"/>
+      <geom name="frame_long_front" type="box" size="0.55 0.015 0.015" pos="0 0.25 -0.04" material="white" mass="1.0"/>
+      <geom name="frame_long_back" type="box" size="0.55 0.015 0.015" pos="0 -0.25 -0.04" material="white" mass="1.0"/>
+      <geom name="frame_short_left" type="box" size="0.015 0.25 0.015" pos="0.585 0 -0.025" material="white" mass="0.5"/>
+      <geom name="frame_short_right" type="box" size="0.015 0.25 0.015" pos="-0.585 0 -0.025" material="white" mass="0.5"/>
+    </body>
+  </worldbody>
+  
+  <sensor>
+      <framepos name='desk/base_pos' objtype='body' objname='table' />
+      <framequat name='desk/base_quat' objtype='body' objname='table' />
+  </sensor>
+
+
+</mujoco>

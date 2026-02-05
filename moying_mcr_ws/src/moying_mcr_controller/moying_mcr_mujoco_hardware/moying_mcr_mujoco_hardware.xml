@@ -1,0 +1,9 @@
+<library path="moying_mcr_mujoco_hardware">
+  <class name="moying_mcr_mujoco_hardware/MoyingMcrMujocoHardware"
+         type="moying_mcr_mujoco_hardware::MoyingMcrMujocoHardware"
+         base_class_type="hardware_interface::SystemInterface">
+    <description>
+      Hardware interface fcr MCR in MuJoCo simulation.
+    </description>
+  </class>
+</library>

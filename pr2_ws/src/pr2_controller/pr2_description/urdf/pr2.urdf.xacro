@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="pr2">
+  <!-- 直接包含原始 URDF 内容 -->
+  <xacro:include filename="$(find pr2_description)/urdf/pr2.urdf"/>
+  <xacro:include filename="$(find pr2_description)/urdf/pr2_ros2_control.xacro"/>
+
+</robot>

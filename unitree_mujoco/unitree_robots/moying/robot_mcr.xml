@@ -1,0 +1,461 @@
+<mujoco>
+  <worldbody>
+    <body name="mcr/base_link" pos="-3.0 -2.0 0.02" quat="0.7071 0 0 0.7071">
+      <freejoint/>
+      <body name="mmcomcr"/>
+      <body name="mcr/vehicle_body" pos="0 0 0.03">
+        <inertial pos="0 0 -0.03" quat="0.5 0.5 -0.5 0.5" mass="100" diaginertia="11.5907 8.45003 3.30737"/>
+        <geom pos="0 0 -0.03" quat="0.5 0.5 0.5 0.5" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75 0.75 0.75 1" mesh="MQ60"/>
+        <geom pos="0 0 -0.03" quat="0.5 0.5 0.5 0.5" type="mesh" rgba="0.75 0.75 0.75 1" mesh="MQ60"/>
+        <body name="body_base" pos="0.27 0 0.78">
+          <inertial pos="0 0 0.1" mass="1" diaginertia="0.00395833 0.00395833 0.00125"/>
+          <geom quat="0.5 0.5 -0.5 -0.5" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="1 1 1 1" mesh="Body_base"/>
+          <geom quat="0.5 0.5 -0.5 -0.5" type="mesh" rgba="1 1 1 1" mesh="Body_base"/>
+          <body name="body">
+            <inertial pos="0 0 0.22" mass="5" diaginertia="0.104167 0.104167 0.075"/>
+            <geom pos="0 0 0" quat="0.707107 0 0 0.707107" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="1 1 1 1" mesh="Body"/>
+            <geom pos="0 0 0" quat="0.707107 0 0 0.707107" type="mesh" rgba="1 1 1 1" mesh="Body"/>
+            
+            <body name="right_arm_base" pos="0 -0.087 0.39" quat="0.5 0.5 0.5 -0.5">
+              <body name="right_arm_elfin3_base_link">
+                <body name="right_arm_elfin3_base" quat="0.707107 0 0 0.707107">
+                  <inertial pos="0.000476057 -0.00609848 0.0271228" quat="0.488241 0.51286 -0.494396 0.504152" mass="1.33644" diaginertia="0.0053992 0.00333682 0.00275551"/>
+                  <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.866667 0.866667 0.890196 1" mesh="elfin3_base"/>
+                  <geom type="mesh" rgba="0.866667 0.866667 0.890196 1" mesh="elfin3_base"/>
+                  <body name="right_arm_elfin3_link1" pos="0 0 0.031" quat="0.707107 0.707107 0 0">
+                    <inertial pos="-0.0192426 0.120158 -2.05351e-05" quat="0.380642 0.595697 -0.381065 0.595857" mass="4.69684" diaginertia="0.0199815 0.017938 0.00799592"/>
+                    <joint name="right_arm_elfin3_joint1" pos="0 0 0" axis="0 1 0" range="-3.14 3.14" actuatorfrcrange="-104 104" frictionloss="6.975520" damping="10.879100" armature="0.0010000"/>
+                    <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.768627 0.74902 0.729412 1" mesh="elfin3_link1"/>
+                    <geom type="mesh" rgba="0.768627 0.74902 0.729412 1" mesh="elfin3_link1"/>
+                    <body name="right_arm_elfin3_link2" pos="-0.068808 0.1615 0">
+                      <inertial pos="-0.036336 0.121775 -3.84046e-05" quat="0.706961 0.706782 -0.0181246 -0.0183581" mass="1.60579" diaginertia="0.017495 0.0168596 0.00161381"/>
+                      <joint name="right_arm_elfin3_joint2" pos="0 0 0" axis="-1 0 0" range="-1.56 1.56" actuatorfrcrange="-104 104" frictionloss="6.144080" damping="7.137970" armature="0.0010000"/>
+                      <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.501961 0.501961 0.501961 1" mesh="elfin3_link2"/>
+                      <geom type="mesh" rgba="0.501961 0.501961 0.501961 1" mesh="elfin3_link2"/>
+                      <body name="right_arm_elfin3_link3" pos="0 0.266 0" quat="0 -1 0 0">
+                        <inertial pos="0.0513625 -0.0377419 -1.41484e-05" quat="0.376181 0.599241 -0.375572 0.598618" mass="3.3222" diaginertia="0.0115212 0.0102402 0.00455721"/>
+                        <joint name="right_arm_elfin3_joint3" pos="0 0 0" axis="1 0 0" range="-3.00 3.00" actuatorfrcrange="-69 69" frictionloss="3.302750" damping="4.010410" armature="0.724542"/>
+                        <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.768627 0.74902 0.729412 1" mesh="elfin3_link3"/>
+                        <geom type="mesh" rgba="0.768627 0.74902 0.729412 1" mesh="elfin3_link3"/>
+                        <body name="right_arm_elfin3_link4" pos="0.068808 -0.10523 0" quat="0 1 0 0">
+                          <inertial pos="-0.0580854 0.100022 -3.45204e-06" quat="0.381511 0.595237 -0.381795 0.595294" mass="1.14412" diaginertia="0.00881148 0.00854009 0.00178165"/>
+                          <joint name="right_arm_elfin3_joint4" pos="0 0 0" axis="0 1 0" range="-6.14 6.14" actuatorfrcrange="-69 69" frictionloss="2.703960" damping="3.719250" armature="1.221800"/>
+                          <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.501961 0.501961 0.501961 1" mesh="elfin3_link4"/>
+                          <geom type="mesh" rgba="0.501961 0.501961 0.501961 1" mesh="elfin3_link4"/>
+                          <body name="right_arm_elfin3_link5" pos="0 0.21877 0" quat="0 -1 0 0">
+                            <inertial pos="-0.015871 -0.0365214 4.94388e-07" quat="0.381489 0.595348 -0.38157 0.595341" mass="2.49371" diaginertia="0.00759074 0.00665571 0.00281748"/>
+                            <joint name="right_arm_elfin3_joint5" pos="0 0 0" axis="1 0 0" range="-3.14 3.14" actuatorfrcrange="-34 34" frictionloss="2.211940" damping="2.894370" armature="0.820333"/>
+                            <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.768627 0.74902 0.729412 1" mesh="elfin3_link5"/>
+                            <geom type="mesh" rgba="0.768627 0.74902 0.729412 1" mesh="elfin3_link5"/>
+                            <body name="right_arm_elfin3_link6" pos="0 -0.1065 0" quat="0 0 1 0">
+                              <inertial pos="-0.0009237 -0.042691 -0.0003367" quat="-0.15942 0.393069 -0.205827 0.881883" mass="0.455194" diaginertia="0.000611425 0.000604883 0.000591187"/>
+                              <joint name="right_arm_elfin3_joint6" pos="0 0 0" axis="0 -1 0" range="-6.14 6.14" actuatorfrcrange="-34 34" frictionloss="2.676120" damping="2.956110" armature="0.441349"/>
+                              <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.866667 0.866667 0.890196 1" mesh="elfin3_link6"/>
+                              <geom type="mesh" rgba="0.866667 0.866667 0.890196 1" mesh="elfin3_link6"/>
+                              <body name="right_arm_elfin3_end_link" pos="0 -0.091 0" quat="0.5 0.5 -0.5 0.5"/>
+                              <body name="right_arm_elfin3_dummy_gripper" pos="0 -0.111 0" quat="0.5 0.5 -0.5 0.5">
+                                <body name="right_arm_ft300_mounting_plate" pos="0 0 -0.034">
+                                  <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.4 0.4 0.4 1" mesh="robotiq_ft300-G-062-COUPLING_G-50-4M6-1D6_20181119"/>
+                                  <geom type="mesh" rgba="0.4 0.4 0.4 1" mesh="robotiq_ft300-G-062-COUPLING_G-50-4M6-1D6_20181119"/>
+                                  <body name="right_arm_ft300_sensor" pos="0 0 0.0415" quat="0 0 1 0">
+                                    <inertial pos="0 0 -0.017" quat="0.709662 -0.000475378 -0.0158879 0.704363" mass="0.3" diaginertia="0.000265022 0.000262023 0.000218955"/>
+                                    <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.2 0.2 0.2 1" mesh="robotiq_ft300"/>
+                                    <geom type="mesh" rgba="0.2 0.2 0.2 1" mesh="robotiq_ft300"/>
+                                    <site name="mcr/right_ft300" />
+                                    <body name="right_arm_robotiq_ft_frame_id" quat="0 0.707107 0.707107 0">
+                                      <body name="right_arm_robotiq_85_base_link">
+                                        <inertial pos="0 2.274e-05 0.0323229" quat="0.707251 -0.000590537 0.000590296 0.706962" mass="0.663202" diaginertia="0.000588023 0.000516178 0.000394627"/>
+                                        <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" mesh="robotiq_base"/>
+                                        <geom type="mesh" mesh="robotiq_base"/>
+                                        <body name="right_arm_robotiq_85_left_knuckle_link" pos="0.0306011 0 0.0549045">
+                                          <inertial pos="0.012132 0.0002 -0.00058647" quat="0.484217 0.5153 0.5153 0.484217" mass="0.0138477" diaginertia="2.31944e-06 2.23867e-06 3.45008e-07"/>
+                                          <joint name="right_arm_robotiq_85_left_knuckle_joint" pos="0 0 0" axis="0 -1 0" range="0 0.8" actuatorfrcrange="-50 50" frictionloss="6.302750" damping="10.4410"/>
+                                          <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" mesh="left_knuckle"/>
+                                          <geom type="mesh" mesh="left_knuckle"/>
+                                          <body name="right_arm_robotiq_85_left_finger_link" pos="0.0315262 0.001 -0.00376347">
+                                            <inertial pos="0.00346899 -0.00079447 0.0186712" quat="0.99325 0 0.115989 0" mass="0.0426038" diaginertia="1.43724e-05 1.18321e-05 4.68228e-06"/>
+                                            <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" mesh="left_finger"/>
+                                            <geom type="mesh" mesh="left_finger"/>
+                                            <body name="right_arm_robotiq_85_left_finger_tip_link" pos="0.00563134 0 0.0471852">
+                                              <site name="right_arm_left_finger_site"  type="cylinder" pos="-0.0180 0 0.0065" euler="1.5707963 0 0" size="0.002 0.01" rgba="0 0 1 1"/>
+                                              <inertial pos="-0.0145671 -0.0008 0.016497" quat="0.977773 0 -0.209665 0" mass="0.0426859" diaginertia="1.20653e-05 1.19789e-05 2.64405e-06"/>
+                                              <joint name="right_arm_robotiq_85_left_finger_tip_joint" pos="0 0 0" axis="0 -1 0" range="-0.8 0.8" actuatorfrcrange="-50 50"/>
+                                              <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" mesh="left_finger_tip"/>
+                                              <geom type="mesh" mesh="left_finger_tip"/>
+                                            </body>
+                                          </body>
+                                        </body>
+                                        <body name="right_arm_robotiq_85_right_knuckle_link" pos="-0.0306011 0 0.0549045">
+                                          <inertial pos="-0.012132 0.0002 -0.00058647" quat="0.5153 0.484217 0.484217 0.5153" mass="0.0138477" diaginertia="2.31944e-06 2.23867e-06 3.45008e-07"/>
+                                          <joint name="right_arm_robotiq_85_right_knuckle_joint" pos="0 0 0" axis="0 -1 0" range="-0.8 0" actuatorfrcrange="-50 50" frictionloss="6.302750" damping="10.4410"/>
+                                          <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" mesh="right_knuckle"/>
+                                          <geom type="mesh" mesh="right_knuckle"/>
+                                          <body name="right_arm_robotiq_85_right_finger_link" pos="-0.0315262 0 -0.00376347">
+                                            <inertial pos="-0.00346899 -5.53e-06 0.0186712" quat="0.99325 0 -0.115989 0" mass="0.0426038" diaginertia="1.43724e-05 1.18321e-05 4.68228e-06"/>
+                                            <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" mesh="right_finger"/>
+                                            <geom type="mesh" mesh="right_finger"/>
+                                            <body name="right_arm_robotiq_85_right_finger_tip_link" pos="-0.00563134 0 0.0471852">
+                                              <site name="right_arm_right_finger_site"  type="cylinder" pos="0.0180 0 0.0065" euler="1.5707963 0 0" size="0.002 0.01" rgba="0 0 1 1"/>
+                                              <inertial pos="0.0145671 5e-05 0.016497" quat="0.977773 0 0.209665 0" mass="0.0426859" diaginertia="1.20653e-05 1.19789e-05 2.64405e-06"/>
+                                              <joint name="right_arm_robotiq_85_right_finger_tip_joint" pos="0 0 0" axis="0 -1 0" range="-0.8 0.8" actuatorfrcrange="-50 50"/>
+                                              <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" mesh="right_finger_tip"/>
+                                              <geom type="mesh" mesh="right_finger_tip"/>
+                                            </body>
+                                          </body>
+                                        </body>
+                                        <body name="right_arm_robotiq_85_left_inner_knuckle_link" pos="0.0127 0 0.06142">
+                                          <site name="right_arm_left_knuckle_site" type="cylinder" pos="0.0370 0 0.043500" euler="1.5707963 0 0" size="0.002 0.01" rgba="0 1 0 1"/>
+                                          <inertial pos="0.018977 0.00015001 0.022471" quat="0.939613 0 0.342237 0" mass="0.0296938" diaginertia="1.28757e-05 8.69056e-06 4.88712e-06"/>
+                                          <joint name="right_arm_robotiq_85_left_inner_knuckle_joint" pos="0 0 0" axis="0 -1 0" range="-0.8 0.8" actuatorfrcrange="-50 50"/>
+                                          <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" mesh="left_inner_knuckle"/>
+                                        </body>
+                                        <body name="right_arm_robotiq_85_right_inner_knuckle_link" pos="-0.0127 0 0.06142">
+                                          <site name="right_arm_right_knuckle_site" type="cylinder" pos="-0.0370 0 0.043500" euler="1.5707963 0 0" size="0.002 0.01" rgba="0 1 0 1"/>
+                                          <inertial pos="-0.0192682 5.001e-05 0.0222218" quat="0.936371 0 -0.351012 0" mass="0.0296938" diaginertia="1.2882e-05 8.69056e-06 4.88076e-06"/>
+                                          <joint name="right_arm_robotiq_85_right_inner_knuckle_joint" pos="0 0 0" axis="0 -1 0" range="-0.8 0.8" actuatorfrcrange="-50 50"/>
+                                          <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" mesh="right_inner_knuckle"/>
+                                        </body>
+                                      </body>
+                                    </body>
+                                  </body>
+                                </body>
+                              </body>
+                            </body>
+                          </body>
+                        </body>
+                      </body>
+                    </body>
+                  </body>
+                </body>
+              </body>
+            </body>
+
+            <body name="left_arm_base" pos="0 0.087 0.39" quat="0.5 -0.5 0.5 0.5">
+              <body name="left_arm_elfin3_base_link">
+                <body name="left_arm_elfin3_base" quat="0.707107 0 0 0.707107">
+                  <inertial pos="0.000476057 -0.00609848 0.0271228" quat="0.488241 0.51286 -0.494396 0.504152" mass="1.33644" diaginertia="0.0053992 0.00333682 0.00275551"/>
+                  <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.866667 0.866667 0.890196 1" mesh="elfin3_base"/>
+                  <geom type="mesh" rgba="0.866667 0.866667 0.890196 1" mesh="elfin3_base"/>
+                  <body name="left_arm_elfin3_link1" pos="0 0 0.031" quat="0.707107 0.707107 0 0">
+                    <inertial pos="-0.0192426 0.120158 -2.05351e-05" quat="0.380642 0.595697 -0.381065 0.595857" mass="4.69684" diaginertia="0.0199815 0.017938 0.00799592"/>
+                    <joint name="left_arm_elfin3_joint1" pos="0 0 0" axis="0 1 0" range="-3.14 3.14" actuatorfrcrange="-104 104" frictionloss="6.975520" damping="10.879100" armature="0.001000"/>
+                    <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.768627 0.74902 0.729412 1" mesh="elfin3_link1"/>
+                    <geom type="mesh" rgba="0.768627 0.74902 0.729412 1" mesh="elfin3_link1"/>
+                    <body name="left_arm_elfin3_link2" pos="-0.068808 0.1615 0">
+                      <inertial pos="-0.036336 0.121775 -3.84046e-05" quat="0.706961 0.706782 -0.0181246 -0.0183581" mass="1.60579" diaginertia="0.017495 0.0168596 0.00161381"/>
+                      <joint name="left_arm_elfin3_joint2" pos="0 0 0" axis="-1 0 0" range="-1.56 1.56" actuatorfrcrange="-104 104" frictionloss="6.144080" damping="7.137970" armature="0.0010000"/>
+                      <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.501961 0.501961 0.501961 1" mesh="elfin3_link2"/>
+                      <geom type="mesh" rgba="0.501961 0.501961 0.501961 1" mesh="elfin3_link2"/>
+                      <body name="left_arm_elfin3_link3" pos="0 0.266 0" quat="0 -1 0 0">
+                        <inertial pos="0.0513625 -0.0377419 -1.41484e-05" quat="0.376181 0.599241 -0.375572 0.598618" mass="3.3222" diaginertia="0.0115212 0.0102402 0.00455721"/>
+                        <joint name="left_arm_elfin3_joint3" pos="0 0 0" axis="1 0 0" range="-3.000 3.00" actuatorfrcrange="-69 69" frictionloss="3.302750" damping="4.010410" armature="0.724542"/>
+                        <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.768627 0.74902 0.729412 1" mesh="elfin3_link3"/>
+                        <geom type="mesh" rgba="0.768627 0.74902 0.729412 1" mesh="elfin3_link3"/>
+                        <body name="left_arm_elfin3_link4" pos="0.068808 -0.10523 0" quat="0 1 0 0">
+                          <inertial pos="-0.0580854 0.100022 -3.45204e-06" quat="0.381511 0.595237 -0.381795 0.595294" mass="1.14412" diaginertia="0.00881148 0.00854009 0.00178165"/>
+                          <joint name="left_arm_elfin3_joint4" pos="0 0 0" axis="0 1 0" range="-6.14 6.14" actuatorfrcrange="-69 69" frictionloss="2.703960" damping="3.719250" armature="1.221800"/>
+                          <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.501961 0.501961 0.501961 1" mesh="elfin3_link4"/>
+                          <geom type="mesh" rgba="0.501961 0.501961 0.501961 1" mesh="elfin3_link4"/>
+                          <body name="left_arm_elfin3_link5" pos="0 0.21877 0" quat="0 -1 0 0">
+                            <inertial pos="-0.015871 -0.0365214 4.94388e-07" quat="0.381489 0.595348 -0.38157 0.595341" mass="2.49371" diaginertia="0.00759074 0.00665571 0.00281748"/>
+                            <joint name="left_arm_elfin3_joint5" pos="0 0 0" axis="1 0 0" range="-3.14 3.14" actuatorfrcrange="-34 34" frictionloss="2.211940" damping="2.894370" armature="0.820333"/>
+                            <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.768627 0.74902 0.729412 1" mesh="elfin3_link5"/>
+                            <geom type="mesh" rgba="0.768627 0.74902 0.729412 1" mesh="elfin3_link5"/>
+                            <body name="left_arm_elfin3_link6" pos="0 -0.1065 0" quat="0 0 1 0">
+                              <inertial pos="-0.0009237 -0.042691 -0.0003367" quat="-0.15942 0.393069 -0.205827 0.881883" mass="0.455194" diaginertia="0.000611425 0.000604883 0.000591187"/>
+                              <joint name="left_arm_elfin3_joint6" pos="0 0 0" axis="0 -1 0" range="-6.14 6.14" actuatorfrcrange="-34 34" frictionloss="2.676120" damping="2.956110" armature="0.441349"/>
+                              <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.866667 0.866667 0.890196 1" mesh="elfin3_link6"/>
+                              <geom type="mesh" rgba="0.866667 0.866667 0.890196 1" mesh="elfin3_link6"/>
+                              <body name="left_arm_elfin3_end_link" pos="0 -0.091 0" quat="0.5 0.5 -0.5 0.5"/>
+                              <body name="left_arm_elfin3_dummy_gripper" pos="0 -0.111 0" quat="0.5 0.5 -0.5 0.5">
+                                <body name="left_arm_ft300_mounting_plate_link" pos="0 0 -0.034">
+                                  <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.4 0.4 0.4 1" mesh="robotiq_ft300-G-062-COUPLING_G-50-4M6-1D6_20181119"/>
+                                  <geom type="mesh" rgba="0.4 0.4 0.4 1" mesh="robotiq_ft300-G-062-COUPLING_G-50-4M6-1D6_20181119"/>
+                                  <body name="left_arm_ft300_sensor" pos="0 0 0.0415" quat="0 0 1 0">
+                                    <inertial pos="0 0 -0.017" quat="0.709662 -0.000475378 -0.0158879 0.704363" mass="0.3" diaginertia="0.000265022 0.000262023 0.000218955"/>
+                                    <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.2 0.2 0.2 1" mesh="robotiq_ft300"/>
+                                    <geom type="mesh" rgba="0.2 0.2 0.2 1" mesh="robotiq_ft300"/>
+                                    <site name="mcr/left_ft300" />
+                                    <body name="left_arm_robotiq_ft_frame_id" quat="0 0.707107 0.707107 0">
+                                      <body name="left_arm_robotiq_85_base_link">
+                                        <inertial pos="0 2.274e-05 0.0323229" quat="0.707251 -0.000590537 0.000590296 0.706962" mass="0.663202" diaginertia="0.000588023 0.000516178 0.000394627"/>
+                                        <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" mesh="robotiq_base"/>
+                                        <geom type="mesh" mesh="robotiq_base"/>
+                                        <body name="left_arm_robotiq_85_left_knuckle_link" pos="0.0306011 0 0.0549045">
+                                          <inertial pos="0.012132 0.0002 -0.00058647" quat="0.484217 0.5153 0.5153 0.484217" mass="0.0138477" diaginertia="2.31944e-06 2.23867e-06 3.45008e-07"/>
+                                          <joint name="left_arm_robotiq_85_left_knuckle_joint" pos="0 0 0" axis="0 -1 0" range="0 0.8" actuatorfrcrange="-50 50" frictionloss="6.302750" damping="10.4410"/>
+                                          <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" mesh="left_knuckle"/>
+                                          <geom type="mesh" mesh="left_knuckle"/>
+                                          <body name="left_arm_robotiq_85_left_finger_link" pos="0.0315262 0.001 -0.00376347">
+                                            <inertial pos="0.00346899 -0.00079447 0.0186712" quat="0.99325 0 0.115989 0" mass="0.0426038" diaginertia="1.43724e-05 1.18321e-05 4.68228e-06"/>
+                                            <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" mesh="left_finger"/>
+                                            <geom type="mesh" mesh="left_finger"/>
+                                            <body name="left_arm_robotiq_85_left_finger_tip_link" pos="0.00563134 0 0.0471852">
+                                              <site name="left_arm_left_finger_site"  type="cylinder" pos="-0.0180 0 0.0065" euler="1.5707963 0 0" size="0.002 0.01" rgba="0 0 1 1"/>
+                                              <inertial pos="-0.0145671 -0.0008 0.016497" quat="0.977773 0 -0.209665 0" mass="0.0426859" diaginertia="1.20653e-05 1.19789e-05 2.64405e-06"/>
+                                              <joint name="left_arm_robotiq_85_left_finger_tip_joint" pos="0 0 0" axis="0 -1 0" range="-0.8 0.8" actuatorfrcrange="-50 50"/>
+                                              <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" mesh="left_finger_tip"/>
+                                              <geom type="mesh" mesh="left_finger_tip"/>
+                                            </body>
+                                          </body>
+                                        </body>
+                                        <body name="left_arm_robotiq_85_right_knuckle_link" pos="-0.0306011 0 0.0549045">
+                                          <inertial pos="-0.012132 0.0002 -0.00058647" quat="0.5153 0.484217 0.484217 0.5153" mass="0.0138477" diaginertia="2.31944e-06 2.23867e-06 3.45008e-07"/>
+                                          <joint name="left_arm_robotiq_85_right_knuckle_joint" pos="0 0 0" axis="0 -1 0" range="-0.8 0" actuatorfrcrange="-50 50" frictionloss="6.302750" damping="10.4410"/>
+                                          <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" mesh="right_knuckle"/>
+                                          <geom type="mesh" mesh="right_knuckle"/>
+                                          <body name="left_arm_robotiq_85_right_finger_link" pos="-0.0315262 0 -0.00376347">
+                                            <inertial pos="-0.00346899 -5.53e-06 0.0186712" quat="0.99325 0 -0.115989 0" mass="0.0426038" diaginertia="1.43724e-05 1.18321e-05 4.68228e-06"/>
+                                            <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" mesh="right_finger"/>
+                                            <geom type="mesh" mesh="right_finger"/>
+                                            <body name="left_arm_robotiq_85_right_finger_tip_link" pos="-0.00563134 0 0.0471852">
+                                              <site name="left_arm_right_finger_site"  type="cylinder" pos="0.0180 0 0.0065" euler="1.5707963 0 0" size="0.002 0.01" rgba="0 0 1 1"/>
+                                              <inertial pos="0.0145671 5e-05 0.016497" quat="0.977773 0 0.209665 0" mass="0.0426859" diaginertia="1.20653e-05 1.19789e-05 2.64405e-06"/>
+                                              <joint name="left_arm_robotiq_85_right_finger_tip_joint" pos="0 0 0" axis="0 -1 0" range="-0.8 0.8" actuatorfrcrange="-50 50"/>
+                                              <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" mesh="right_finger_tip"/>
+                                              <geom type="mesh" mesh="right_finger_tip"/>
+                                            </body>
+                                          </body>
+                                        </body>
+                                        <body name="left_arm_robotiq_85_left_inner_knuckle_link" pos="0.0127 0 0.06142">
+                                          <site name="left_arm_left_knuckle_site" type="cylinder" pos="0.0370 0 0.043500" euler="1.5707963 0 0" size="0.002 0.01" rgba="0 1 0 1"/>
+                                          <inertial pos="0.018977 0.00015001 0.022471" quat="0.939613 0 0.342237 0" mass="0.0296938" diaginertia="1.28757e-05 8.69056e-06 4.88712e-06"/>
+                                          <joint name="left_arm_robotiq_85_left_inner_knuckle_joint" pos="0 0 0" axis="0 -1 0" range="-0.8 0.80" actuatorfrcrange="-50 50"/>
+                                          <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" mesh="left_inner_knuckle"/>
+                                        </body>
+                                        <body name="left_arm_robotiq_85_right_inner_knuckle_link" pos="-0.0127 0 0.06142">
+                                          <site name="left_arm_right_knuckle_site" type="cylinder" pos="-0.0370 0 0.043500" euler="1.5707963 0 0" size="0.002 0.01" rgba="0 1 0 1"/>
+                                          <inertial pos="-0.0192682 5.001e-05 0.0222218" quat="0.936371 0 -0.351012 0" mass="0.0296938" diaginertia="1.2882e-05 8.69056e-06 4.88076e-06"/>
+                                          <joint name="left_arm_robotiq_85_right_inner_knuckle_joint" pos="0 0 0" axis="0 -1 0" range="-0.8 0.8" actuatorfrcrange="-50 50"/>
+                                          <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" mesh="right_inner_knuckle"/>
+                                        </body>
+                                      </body>
+                                    </body>
+                                  </body>
+                                </body>
+                              </body>
+                            </body>
+                          </body>
+                        </body>
+                      </body>
+                    </body>
+                  </body>
+                </body>
+              </body>
+            </body>
+
+            <body name="head_base" pos="0 0 0.541">
+              <inertial pos="0 0 0" mass="1" diaginertia="0.00166667 0.00166667 0.00166667"/>
+              <geom quat="0.707107 0 0 0.707107" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="1 1 1 1" mesh="YF14_Head_base"/>
+              <geom quat="0.707107 0 0 0.707107" type="mesh" rgba="1 1 1 1" mesh="YF14_Head_base"/>
+              <body name="head" pos="0 0.022 0">
+                <inertial pos="0 0 0" mass="1" diaginertia="0.00166667 0.00166667 0.00166667"/>
+                <geom pos="0 0 0" quat="0 0 0.707107 0.707107" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="1 1 1 1" mesh="YF14_Head"/>
+                <geom pos="0 0 0" quat="0 0 0.707107 0.707107" type="mesh" rgba="1 1 1 1" mesh="YF14_Head"/>
+              </body>
+            </body>
+          </body>
+          <body name="head_camera_camera_link" pos="0 0 0.72" quat="0.990216 0 0.139543 0">
+            <inertial pos="0 0 0" quat="0.707107 0.707107 0 0" mass="0.564" diaginertia="0.00388124 0.00387926 0.00049894"/>
+            <geom pos="0.0149 0 0.0125" quat="0.5 0.5 0.5 0.5" type="mesh" contype="0" conaffinity="0" group="1" density="0" mesh="d435"/>
+            <body name="head_camera_camera_depth_frame" pos="0.0149 0.0175 0.0125">
+              <body name="head_camera_camera_depth_optical_frame" quat="0.5 -0.5 0.5 -0.5"/>
+              <body name="head_camera_camera_left_ir_frame">
+                <body name="head_camera_camera_left_ir_optical_frame" quat="0.5 -0.5 0.5 -0.5"/>
+              </body>
+              <body name="head_camera_camera_right_ir_frame" pos="0 -0.05 0">
+                <body name="head_camera_camera_right_ir_optical_frame" quat="0.5 -0.5 0.5 -0.5"/>
+              </body>
+              <body name="head_camera_camera_color_frame" pos="0 0.015 0">
+                <body name="head_camera_camera_color_optical_frame" quat="0.5 -0.5 0.5 -0.5"/>
+              </body>
+            </body>
+          </body>
+        </body>
+        <body name="mcr/extention_shell">
+          <geom pos="0 0 0" quat="0.707107 0 0 -0.707107" type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.75 0.75 0.75 1" mesh="CD6003"/>
+          <geom pos="0 0 0" quat="0.707107 0 0 -0.707107" type="mesh" rgba="0.75 0.75 0.75 1" mesh="CD6003"/>
+        </body>
+      </body>
+      <body name="mcr/forward_left_wheel" pos="0.27 0.1795 0.088" euler="1.5707963 0 0">
+        <inertial pos="0 0 0" quat="0.707107 0 0 0.707107" mass="10.59" diaginertia="0.002749 0.001416 0.001416"/>
+        <joint name="mcr/fl_wheel" type="hinge" pos="0 0 0" axis="0 0 -1 " frictionloss="0.000002"/>
+            <geom type="mesh" mesh="wheel_right" rgba="0.5 0.5 0.5 1" contype="2" conaffinity="4"/>
+            <replicate count="8" euler="0 0 0.785398">
+              <body euler="-0.785398 0 0">
+                  <joint type="hinge" pos="0.082 0 0.0022" axis="0 0 -1" frictionloss=".000002" />
+                  <geom type="mesh" mesh="roller" pos="0.082 0 0.0022" rgba="0.9 0.4 0.1 1"/>
+              </body>
+        </replicate>
+      </body>
+      <body name="mcr/forward_right_wheel" pos="0.27 -0.1795 0.088" euler="1.5707963 0 0">
+        <inertial pos="0 0 0" quat="0.707107 0 0 0.707107" mass="10.59" diaginertia="0.002749 0.001416 0.001416"/>
+        <joint name="mcr/fr_wheel" type="hinge" pos="0 0 0" axis="0 0 -1" frictionloss="0.000002"/>
+                <geom type="mesh" mesh="wheel_left" rgba="0.5 0.5 0.5 1" contype="2" conaffinity="4"/>
+                <replicate count="8" euler="0 0 0.785398">
+                    <body euler="0.785398 0 0">
+                        <joint type="hinge" pos="0.082 0 0.0022" axis="0 0 1" frictionloss=".000002" />
+                        <geom type="mesh" mesh="roller"  pos="0.082 0 0.0022" rgba="0.9 0.4 0.1 1"/>
+                    </body>
+                </replicate>
+      </body>
+      <body name="mcr/back_left_wheel" pos="-0.27 0.1795 0.088" euler="1.5707963 0 0">
+        <joint name="mcr/bl_wheel" type="hinge" pos="0 0 0" axis="0 0 -1" frictionloss="0.000002"/>
+        <inertial pos="0 0 0" quat="0.707107 0 0 0.707107" mass="10.59" diaginertia="0.002749 0.001416 0.001416"/>
+                <geom type="mesh" mesh="wheel_left" rgba="0.5 0.5 0.5 1" contype="2" conaffinity="4"/>
+                <replicate count="8" euler="0 0 0.785398">
+                    <body euler="0.785398 0 0">
+                        <joint type="hinge" pos="0.082 0 0" axis="0 0 1" frictionloss=".000002" />
+                        <geom type="mesh" mesh="roller"  pos="0.082 0 0" rgba="0.9 0.4 0.1 1"/>
+                    </body>
+          </replicate>
+      </body>
+      <body name="mcr/back_right_wheel" pos="-0.27 -0.1795 0.088" euler="1.5707963 0 0">
+        <inertial pos="0 0 0" quat="0.707107 0 0 0.707107" mass="10.59" diaginertia="0.002749 0.001416 0.001416"/>
+        <joint name="mcr/br_wheel" type="hinge" pos="0 0 0" axis="0 0 -1" frictionloss="0.000002"/>
+                <geom type="mesh" mesh="wheel_right"  rgba="0.5 0.5 0.5 1" contype="2" conaffinity="4"/>
+                <replicate count="8" euler="0 0 0.785398">
+                    <body euler="-0.785398 0 0">
+                        <joint type="hinge" pos="0.082 0 0.0022" axis="0 0 1" frictionloss=".000002" />
+                        <geom type="mesh" mesh="roller"  pos="0.082 0 0.0022" rgba="0.9 0.4 0.1 1"/>
+                    </body>
+                </replicate>
+      </body>
+      <body name="mcr/ex_link" pos="0.35 0 0.75" quat="0.707107 0 0 -0.707107"/>
+    </body>
+  </worldbody>
+
+  <tendon>
+    <fixed name="mcr/cmd_vel_lx">
+      <joint joint="mcr/fl_wheel" coef="0.25"/>
+      <joint joint="mcr/fr_wheel" coef="0.25"/>
+      <joint joint="mcr/bl_wheel" coef="0.25"/>
+      <joint joint="mcr/br_wheel" coef="0.25"/>
+    </fixed>
+    <fixed name="mcr/cmd_vel_ly" frictionloss="0.001">
+      <joint joint="mcr/fl_wheel" coef="0.25"/>
+      <joint joint="mcr/fr_wheel" coef="-0.25"/>
+      <joint joint="mcr/bl_wheel" coef="-0.25"/>
+      <joint joint="mcr/br_wheel" coef="0.25"/>
+    </fixed>
+    <fixed name="mcr/cmd_vel_rz">
+      <joint joint="mcr/fl_wheel" coef="0.25"/>
+      <joint joint="mcr/fr_wheel" coef="-0.25"/>
+      <joint joint="mcr/bl_wheel" coef="0.25"/>
+      <joint joint="mcr/br_wheel" coef="-0.25"/>
+    </fixed>
+  </tendon>
+
+  <actuator>
+      <motor name="mcr/left_joint1" ctrllimited="true" ctrlrange="-104 104" forcerange="-104 104" forcelimited="true" joint="left_arm_elfin3_joint1"/>
+      <motor name="mcr/left_joint2" ctrllimited="true" ctrlrange="-104 104" forcerange="-104 104" forcelimited="true" joint="left_arm_elfin3_joint2"/>
+      <motor name="mcr/left_joint3" ctrllimited="true" ctrlrange="-69 69" forcerange="-69 69" forcelimited="true" joint="left_arm_elfin3_joint3"/>
+      <motor name="mcr/left_joint4" ctrllimited="true" ctrlrange="-69 69" forcerange="-69 69" forcelimited="true" joint="left_arm_elfin3_joint4"/>
+      <motor name="mcr/left_joint5" ctrllimited="true" ctrlrange="-34 34" forcerange="-34 34" forcelimited="true" joint="left_arm_elfin3_joint5"/>
+      <motor name="mcr/left_joint6" ctrllimited="true" ctrlrange="-34 34" forcerange="-34 34" forcelimited="true" joint="left_arm_elfin3_joint6"/>
+
+      <motor name="mcr/right_joint1" ctrllimited="true" ctrlrange="-104 104" forcerange="-104 104" forcelimited="true" joint="right_arm_elfin3_joint1"/>
+      <motor name="mcr/right_joint2" ctrllimited="true" ctrlrange="-104 104" forcerange="-104 104" forcelimited="true" joint="right_arm_elfin3_joint2"/>
+      <motor name="mcr/right_joint3" ctrllimited="true" ctrlrange="-69 69" forcerange="-69 69" forcelimited="true" joint="right_arm_elfin3_joint3"/>
+      <motor name="mcr/right_joint4" ctrllimited="true" ctrlrange="-69 69" forcerange="-69 69" forcelimited="true" joint="right_arm_elfin3_joint4"/>
+      <motor name="mcr/right_joint5" ctrllimited="true" ctrlrange="-34 34" forcerange="-34 34" forcelimited="true" joint="right_arm_elfin3_joint5"/>
+      <motor name="mcr/right_joint6" ctrllimited="true" ctrlrange="-34 34" forcerange="-34 34" forcelimited="true" joint="right_arm_elfin3_joint6"/>
+
+      <velocity joint="mcr/fl_wheel" name="mcr/fl_wheel" kv="300" ctrlrange="-15 15"/>
+      <velocity joint="mcr/fr_wheel" name="mcr/fr_wheel" kv="300" ctrlrange="-15 15"/>
+      <velocity joint="mcr/bl_wheel" name="mcr/bl_wheel" kv="300" ctrlrange="-15 15"/>
+      <velocity joint="mcr/br_wheel" name="mcr/br_wheel" kv="300" ctrlrange="-15 15"/>
+
+      <position joint ="right_arm_robotiq_85_left_knuckle_joint" name="mcr/right_robitiq_joint" kp="100" kv="1.1" ctrlrange="0 0.8"/>
+      <position joint ="left_arm_robotiq_85_left_knuckle_joint" name="mcr/left_robitiq_joint" kp="100" kv="1.1" ctrlrange="0 0.8"/>
+  </actuator>
+
+  <equality>
+    <connect name="left_arm_left_fig_connect"
+            site1="left_arm_left_knuckle_site"
+            site2="left_arm_left_finger_site"
+            solref="0.001 1"
+            solimp="0.95 0.99 0.001"/>
+    <connect name="left_arm_right_fig_connect"
+            site1="left_arm_right_finger_site"
+            site2="left_arm_right_knuckle_site"
+            solref="0.001 1"
+            solimp="0.95 0.99 0.001"/>
+
+    <connect name="right_arm_left_fig_connect"
+            site1="right_arm_left_knuckle_site"
+            site2="right_arm_left_finger_site"
+            solref="0.001 1"
+            solimp="0.95 0.99 0.001"/>
+    <connect name="right_arm_right_fig_connect"
+            site1="right_arm_right_finger_site"
+            site2="right_arm_right_knuckle_site"
+            solref="0.001 1"
+            solimp="0.95 0.99 0.001"/>
+
+    <joint joint1 ="right_arm_robotiq_85_left_knuckle_joint" joint2 ="right_arm_robotiq_85_right_knuckle_joint" polycoef="0 -1 0 0 0" solref="0.001 1" solimp="0.95 0.99 0.001"/>
+    <joint joint1 ="left_arm_robotiq_85_left_knuckle_joint" joint2 ="left_arm_robotiq_85_right_knuckle_joint" polycoef="0 -1 0 0 0" solref="0.001 1" solimp="0.95 0.99 0.001"/>
+  </equality>
+
+  <sensor>
+      <jointpos name='mcr/left_joint1_p' joint='left_arm_elfin3_joint1' />
+      <jointpos name='mcr/left_joint2_p' joint='left_arm_elfin3_joint2' />
+      <jointpos name='mcr/left_joint3_p' joint='left_arm_elfin3_joint3' />
+      <jointpos name='mcr/left_joint4_p' joint='left_arm_elfin3_joint4' />
+      <jointpos name='mcr/left_joint5_p' joint='left_arm_elfin3_joint5' />
+      <jointpos name='mcr/left_joint6_p' joint='left_arm_elfin3_joint6' />
+      <jointpos name='mcr/right_joint1_p' joint='right_arm_elfin3_joint1' />
+      <jointpos name='mcr/right_joint2_p' joint='right_arm_elfin3_joint2' />
+      <jointpos name='mcr/right_joint3_p' joint='right_arm_elfin3_joint3' />
+      <jointpos name='mcr/right_joint4_p' joint='right_arm_elfin3_joint4' />
+      <jointpos name='mcr/right_joint5_p' joint='right_arm_elfin3_joint5' />
+      <jointpos name='mcr/right_joint6_p' joint='right_arm_elfin3_joint6' />
+
+      <jointvel name='mcr/left_joint1_v' joint='left_arm_elfin3_joint1' />
+      <jointvel name='mcr/left_joint2_v' joint='left_arm_elfin3_joint2' />
+      <jointvel name='mcr/left_joint3_v' joint='left_arm_elfin3_joint3' />
+      <jointvel name='mcr/left_joint4_v' joint='left_arm_elfin3_joint4' />
+      <jointvel name='mcr/left_joint5_v' joint='left_arm_elfin3_joint5' />
+      <jointvel name='mcr/left_joint6_v' joint='left_arm_elfin3_joint6' />
+      <jointvel name='mcr/right_joint1_v' joint='right_arm_elfin3_joint1' />
+      <jointvel name='mcr/right_joint2_v' joint='right_arm_elfin3_joint2' />
+      <jointvel name='mcr/right_joint3_v' joint='right_arm_elfin3_joint3' />
+      <jointvel name='mcr/right_joint4_v' joint='right_arm_elfin3_joint4' />
+      <jointvel name='mcr/right_joint5_v' joint='right_arm_elfin3_joint5' />
+      <jointvel name='mcr/right_joint6_v' joint='right_arm_elfin3_joint6' />
+
+      <jointactuatorfrc name='mcr/left_joint1_t' joint='left_arm_elfin3_joint1' />
+      <jointactuatorfrc name='mcr/left_joint2_t' joint='left_arm_elfin3_joint2' />
+      <jointactuatorfrc name='mcr/left_joint3_t' joint='left_arm_elfin3_joint3' />
+      <jointactuatorfrc name='mcr/left_joint4_t' joint='left_arm_elfin3_joint4' />
+      <jointactuatorfrc name='mcr/left_joint5_t' joint='left_arm_elfin3_joint5' />
+      <jointactuatorfrc name='mcr/left_joint6_t' joint='left_arm_elfin3_joint6' />
+      <jointactuatorfrc name='mcr/right_joint1_t' joint='right_arm_elfin3_joint1' />
+      <jointactuatorfrc name='mcr/right_joint2_t' joint='right_arm_elfin3_joint2' />
+      <jointactuatorfrc name='mcr/right_joint3_t' joint='right_arm_elfin3_joint3' />
+      <jointactuatorfrc name='mcr/right_joint4_t' joint='right_arm_elfin3_joint4' />
+      <jointactuatorfrc name='mcr/right_joint5_t' joint='right_arm_elfin3_joint5' />
+      <jointactuatorfrc name='mcr/right_joint6_t' joint='right_arm_elfin3_joint6' />
+
+      <framepos name='mcr/base_pos' objtype='body' objname='mmcomcr' />
+      <framequat name='mcr/base_quat' objtype='body' objname='mmcomcr' />
+
+      <force name="mcr/right_force" site="mcr/right_ft300" />
+      <torque name="mcr/right_torque" site="mcr/right_ft300" />
+      <force name="mcr/left_force" site="mcr/left_ft300" />
+      <torque name="mcr/left_torque" site="mcr/left_ft300" />
+
+      <jointvel name='mcr/fr_wheel_v' joint='mcr/fr_wheel' />
+      <jointvel name='mcr/fl_wheel_v' joint='mcr/fl_wheel' />
+      <jointvel name='mcr/br_wheel_v' joint='mcr/br_wheel' />
+      <jointvel name='mcr/bl_wheel_v' joint='mcr/bl_wheel' />
+
+      <jointpos name='mcr/fr_wheel_p' joint='mcr/fr_wheel' />
+      <jointpos name='mcr/fl_wheel_p' joint='mcr/fl_wheel' />
+      <jointpos name='mcr/br_wheel_p' joint='mcr/br_wheel' />
+      <jointpos name='mcr/bl_wheel_p' joint='mcr/bl_wheel' />
+      
+      <jointpos name='mcr/left_robitiq_joint' joint='left_arm_robotiq_85_left_knuckle_joint' />
+      <jointpos name='mcr/right_robitiq_joint' joint='right_arm_robotiq_85_left_knuckle_joint' />
+  </sensor>
+</mujoco>

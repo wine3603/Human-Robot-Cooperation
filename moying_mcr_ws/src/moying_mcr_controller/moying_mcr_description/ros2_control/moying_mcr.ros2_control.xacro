@@ -1,0 +1,249 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="wheel_transmission" params="prefix">
+    <joint name="${prefix}_wheel_joint">
+      <command_interface name="velocity"/>
+      <state_interface name="position"/><state_interface name="velocity"/>
+    </joint>
+  </xacro:macro>
+  <xacro:macro name="omni_wheel_transmission" params="prefix">
+    <joint name="${prefix}_pivot_joint">
+      <command_interface name="position"/>
+      <state_interface name="position"/><state_interface name="velocity"/>
+    </joint>
+    <joint name="${prefix}_drive_joint">
+      <command_interface name="velocity"/>
+      <state_interface name="position"/><state_interface name="velocity"/>
+    </joint>
+  </xacro:macro>
+
+  <xacro:macro name="prefix_elfin_joint_transmission" params="headprefix prefix">
+    <joint name="${headprefix}_elfin_joint${prefix}">
+      <command_interface name="effort"/><command_interface name="position"/><command_interface name="velocity"/>
+      <state_interface name="effort"/><state_interface name="position"/><state_interface name="velocity"/>
+    </joint>
+  </xacro:macro>
+  <xacro:macro name="prefix_elfin_joint_gazebo_transmission" params="headprefix prefix">
+    <joint name="${headprefix}_elfin_joint${prefix}">
+      <command_interface name="velocity"/>
+      <state_interface name="effort"/><state_interface name="position"/><state_interface name="velocity"/>
+    </joint>
+  </xacro:macro>
+  <xacro:macro name="prefix_elfin_joint_mujoco_transmission" params="headprefix prefix">
+    <joint name="${headprefix}_elfin_joint${prefix}">
+      <command_interface name="effort"/>
+      <state_interface name="effort"/><state_interface name="position"/><state_interface name="velocity"/>
+    </joint>
+  </xacro:macro>
+  <xacro:macro name="prefix_elfin_joint_isaac_sim_transmission" params="headprefix prefix">
+    <joint name="${headprefix}_elfin_joint${prefix}">
+      <command_interface name="position"/>
+      <state_interface name="position"/><state_interface name="velocity"/>
+    </joint>
+  </xacro:macro>
+
+  <xacro:macro name="robotiq_fts_zombie_ros2_control" params="name use_fake_mode:=false max_retries:=1 read_rate:=10 ftdi_id:='' tf_prefix">
+    <ros2_control name="${name}robotiq_ft_sensor" type="sensor">
+      <hardware>
+          <plugin>robotiq_ft_sensor_hardware_zombie/RobotiqFTSensorHardwareZombie</plugin>
+          <param name="use_fake_mode">${use_fake_mode}</param>
+          <param name="max_retries">${max_retries}</param>
+          <param name="read_rate">${read_rate}</param>
+          <param name="ftdi_id">${ftdi_id}</param>
+      </hardware>
+      <sensor name="${tf_prefix}robotiq_ft_sensor">
+        <state_interface name="force.x"/><state_interface name="force.y"/><state_interface name="force.z"/>
+        <state_interface name="torque.x"/><state_interface name="torque.y"/><state_interface name="torque.z"/>
+      </sensor>
+    </ros2_control>
+  </xacro:macro>
+
+  <xacro:macro name="robotiq_fts_ros2_control" params="name use_fake_mode:=false max_retries:=1 read_rate:=10 ftdi_id:='' tf_prefix">
+    <ros2_control name="${name}robotiq_ft_sensor" type="sensor">
+      <hardware>
+          <plugin>robotiq_ft_sensor_hardware/RobotiqFTSensorHardware</plugin>
+          <param name="use_fake_mode">${use_fake_mode}</param>
+          <param name="max_retries">${max_retries}</param>
+          <param name="read_rate">${read_rate}</param>
+          <param name="ftdi_id">${ftdi_id}</param>
+      </hardware>
+      <sensor name="${tf_prefix}robotiq_ft_sensor">
+        <state_interface name="force.x"/><state_interface name="force.y"/><state_interface name="force.z"/>
+        <state_interface name="torque.x"/><state_interface name="torque.y"/><state_interface name="torque.z"/>
+      </sensor>
+    </ros2_control>
+  </xacro:macro>
+
+  <xacro:macro name="robotiq_gripper_ros2_control" params="name prefix sim_ignition:=false sim_isaac:=false isaac_joint_commands:=/isaac_joint_commands isaac_joint_states:=/isaac_joint_states use_fake_hardware:=false mock_sensor_commands:=false com_port:=/dev/ttyUSB0">
+    <ros2_control name="${name}" type="system">
+        <hardware>
+            <xacro:if value="${sim_ignition}"><plugin>ign_ros2_control/IgnitionSystem</plugin></xacro:if>
+            <xacro:if value="${sim_isaac}">
+                <plugin>topic_based_ros2_control/TopicBasedSystem</plugin>
+                <param name="joint_commands_topic">${isaac_joint_commands}</param>
+                <param name="joint_states_topic">${isaac_joint_states}</param>
+            </xacro:if>
+        </hardware>
+        <joint name="${prefix}robotiq_85_left_knuckle_joint">
+            <command_interface name="position" />
+            <state_interface name="position"><param name="initial_value">0.0</param></state_interface>
+            <state_interface name="velocity"/>
+        </joint>
+        <joint name="${prefix}robotiq_85_right_knuckle_joint">
+            <param name="mimic">${prefix}robotiq_85_left_knuckle_joint</param><param name="multiplier">1</param>
+        </joint>
+        <joint name="${prefix}robotiq_85_left_inner_knuckle_joint">
+            <param name="mimic">${prefix}robotiq_85_left_knuckle_joint</param><param name="multiplier">1</param>
+        </joint>
+        <joint name="${prefix}robotiq_85_right_inner_knuckle_joint">
+            <param name="mimic">${prefix}robotiq_85_left_knuckle_joint</param><param name="multiplier">1</param>
+        </joint>
+        <joint name="${prefix}robotiq_85_left_finger_tip_joint">
+            <param name="mimic">${prefix}robotiq_85_left_knuckle_joint</param><param name="multiplier">-1</param>
+        </joint>
+        <joint name="${prefix}robotiq_85_right_finger_tip_joint">
+            <param name="mimic">${prefix}robotiq_85_left_knuckle_joint</param><param name="multiplier">-1</param>
+        </joint>
+    </ros2_control>
+  </xacro:macro>
+
+
+  <xacro:macro name="moying_mcr_control" params="mode">
+    
+    <xacro:if value="${mode=='real'}">
+      <ros2_control name="mcr_right_arm_control" type="system">
+        <hardware>
+          <plugin>moying_mcr_hardware/ArmHardwareInterface</plugin>
+          <param name="config_path">moying_mcr_bringup</param>
+          <param name="config_file">/config/right_arm_driver.yaml</param>
+        </hardware>
+        <xacro:prefix_elfin_joint_transmission headprefix="right_arm" prefix="1"/>
+        <xacro:prefix_elfin_joint_transmission headprefix="right_arm" prefix="2"/>
+        <xacro:prefix_elfin_joint_transmission headprefix="right_arm" prefix="3"/>
+        <xacro:prefix_elfin_joint_transmission headprefix="right_arm" prefix="4"/>
+        <xacro:prefix_elfin_joint_transmission headprefix="right_arm" prefix="5"/>
+        <xacro:prefix_elfin_joint_transmission headprefix="right_arm" prefix="6"/>
+      </ros2_control>
+      
+      <ros2_control name="mcr_left_arm_control" type="system">
+        <hardware>
+          <plugin>moying_mcr_hardware_zombie/ArmHardwareInterface</plugin>
+          <param name="config_path">moying_mcr_bringup</param>
+          <param name="config_file">/config/left_arm_driver.yaml</param>
+        </hardware>
+        <xacro:prefix_elfin_joint_transmission headprefix="left_arm" prefix="1"/>
+        <xacro:prefix_elfin_joint_transmission headprefix="left_arm" prefix="2"/>
+        <xacro:prefix_elfin_joint_transmission headprefix="left_arm" prefix="3"/>
+        <xacro:prefix_elfin_joint_transmission headprefix="left_arm" prefix="4"/>
+        <xacro:prefix_elfin_joint_transmission headprefix="left_arm" prefix="5"/>
+        <xacro:prefix_elfin_joint_transmission headprefix="left_arm" prefix="6"/>
+      </ros2_control>
+      
+      <ros2_control name="mcr_chassis_control" type="system">
+        <hardware>
+          <plugin>moying_chassis_hardware/ChassisInterface</plugin>
+          <param name="config_path">moying_mcr_bringup</param>
+          <param name="config_file">/config/chassis_driver.yaml</param>
+        </hardware>
+        <xacro:wheel_transmission prefix="forward_right"/>
+        <xacro:wheel_transmission prefix="forward_left"/>
+        <xacro:wheel_transmission prefix="back_right"/>
+        <xacro:wheel_transmission prefix="back_left"/>
+      </ros2_control>
+      
+      </xacro:if>
+
+    <xacro:if value="${mode=='mujoco'}">
+      <ros2_control name="mcr_control" type="system">
+        <hardware>
+          <plugin>moying_mcr_mujoco_hardware/MoyingMcrMujocoHardware</plugin>
+          <param name="domain">1</param>
+          <param name="network_interface">lo</param>
+        </hardware>
+
+        <xacro:prefix_elfin_joint_mujoco_transmission headprefix="left_arm" prefix="1"/>
+        <xacro:prefix_elfin_joint_mujoco_transmission headprefix="left_arm" prefix="2"/>
+        <xacro:prefix_elfin_joint_mujoco_transmission headprefix="left_arm" prefix="3"/>
+        <xacro:prefix_elfin_joint_mujoco_transmission headprefix="left_arm" prefix="4"/>
+        <xacro:prefix_elfin_joint_mujoco_transmission headprefix="left_arm" prefix="5"/>
+        <xacro:prefix_elfin_joint_mujoco_transmission headprefix="left_arm" prefix="6"/>
+        <xacro:prefix_elfin_joint_mujoco_transmission headprefix="right_arm" prefix="1"/>
+        <xacro:prefix_elfin_joint_mujoco_transmission headprefix="right_arm" prefix="2"/>
+        <xacro:prefix_elfin_joint_mujoco_transmission headprefix="right_arm" prefix="3"/>
+        <xacro:prefix_elfin_joint_mujoco_transmission headprefix="right_arm" prefix="4"/>
+        <xacro:prefix_elfin_joint_mujoco_transmission headprefix="right_arm" prefix="5"/>
+        <xacro:prefix_elfin_joint_mujoco_transmission headprefix="right_arm" prefix="6"/>
+        <xacro:wheel_transmission prefix="forward_right"/>
+        <xacro:wheel_transmission prefix="forward_left"/>
+        <xacro:wheel_transmission prefix="back_right"/>
+        <xacro:wheel_transmission prefix="back_left"/>
+        
+        <joint name="left_arm_robotiq_85_left_knuckle_joint">
+          <command_interface name="position"/>
+          <state_interface name="position"/>
+        </joint>
+        <joint name="right_arm_robotiq_85_left_knuckle_joint">
+          <command_interface name="position"/>
+          <state_interface name="position"/>
+        </joint>
+      </ros2_control>
+    </xacro:if>
+
+    <xacro:if value="${mode=='gazebo'}">
+      <ros2_control name="mcr_gazebo_control" type="system">
+        <hardware>
+          <plugin>ign_ros2_control/IgnitionSystem</plugin>
+        </hardware>
+        <xacro:omni_wheel_transmission prefix="forward_right"/>
+        <xacro:omni_wheel_transmission prefix="forward_left"/>
+        <xacro:omni_wheel_transmission prefix="back_right"/>
+        <xacro:omni_wheel_transmission prefix="back_left"/>
+        <xacro:prefix_elfin_joint_gazebo_transmission headprefix="left_arm" prefix="1"/>
+        <xacro:prefix_elfin_joint_gazebo_transmission headprefix="left_arm" prefix="2"/>
+        <xacro:prefix_elfin_joint_gazebo_transmission headprefix="left_arm" prefix="3"/>
+        <xacro:prefix_elfin_joint_gazebo_transmission headprefix="left_arm" prefix="4"/>
+        <xacro:prefix_elfin_joint_gazebo_transmission headprefix="left_arm" prefix="5"/>
+        <xacro:prefix_elfin_joint_gazebo_transmission headprefix="left_arm" prefix="6"/>
+        <xacro:prefix_elfin_joint_gazebo_transmission headprefix="right_arm" prefix="1"/>
+        <xacro:prefix_elfin_joint_gazebo_transmission headprefix="right_arm" prefix="2"/>
+        <xacro:prefix_elfin_joint_gazebo_transmission headprefix="right_arm" prefix="3"/>
+        <xacro:prefix_elfin_joint_gazebo_transmission headprefix="right_arm" prefix="4"/>
+        <xacro:prefix_elfin_joint_gazebo_transmission headprefix="right_arm" prefix="5"/>
+        <xacro:prefix_elfin_joint_gazebo_transmission headprefix="right_arm" prefix="6"/>
+      </ros2_control>
+      
+      <xacro:robotiq_gripper_ros2_control name="left_gripper_gz" prefix="left_arm_" sim_ignition="true"/>
+      <xacro:robotiq_gripper_ros2_control name="right_gripper_gz" prefix="right_arm_" sim_ignition="true"/>
+    </xacro:if>
+
+    <xacro:if value="${mode=='isaac'}">
+      <ros2_control name="isaac_mor" type="system">
+        <hardware>
+          <plugin>topic_based_ros2_control/TopicBasedSystem</plugin>
+          <param name="trigger_joint_command_threshold">-1</param>
+          <param name="joint_commands_topic">/isaac_joint_command</param>
+          <param name="joint_states_topic">/isaac_joint_states</param>
+        </hardware>
+        <xacro:omni_wheel_transmission prefix="forward_right"/>
+        <xacro:omni_wheel_transmission prefix="forward_left"/>
+        <xacro:omni_wheel_transmission prefix="back_right"/>
+        <xacro:omni_wheel_transmission prefix="back_left"/>
+        <xacro:prefix_elfin_joint_isaac_sim_transmission headprefix="left_arm" prefix="1"/>
+        <xacro:prefix_elfin_joint_isaac_sim_transmission headprefix="left_arm" prefix="2"/>
+        <xacro:prefix_elfin_joint_isaac_sim_transmission headprefix="left_arm" prefix="3"/>
+        <xacro:prefix_elfin_joint_isaac_sim_transmission headprefix="left_arm" prefix="4"/>
+        <xacro:prefix_elfin_joint_isaac_sim_transmission headprefix="left_arm" prefix="5"/>
+        <xacro:prefix_elfin_joint_isaac_sim_transmission headprefix="left_arm" prefix="6"/>
+        <xacro:prefix_elfin_joint_isaac_sim_transmission headprefix="right_arm" prefix="1"/>
+        <xacro:prefix_elfin_joint_isaac_sim_transmission headprefix="right_arm" prefix="2"/>
+        <xacro:prefix_elfin_joint_isaac_sim_transmission headprefix="right_arm" prefix="3"/>
+        <xacro:prefix_elfin_joint_isaac_sim_transmission headprefix="right_arm" prefix="4"/>
+        <xacro:prefix_elfin_joint_isaac_sim_transmission headprefix="right_arm" prefix="5"/>
+        <xacro:prefix_elfin_joint_isaac_sim_transmission headprefix="right_arm" prefix="6"/>
+      </ros2_control>
+    </xacro:if>
+
+  </xacro:macro>
+</robot>
+

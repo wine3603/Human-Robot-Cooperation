@@ -1,0 +1,9 @@
+<library path="robotiq_ft_sensor_hardware_zombie">
+  <class name="robotiq_ft_sensor_hardware_zombie/RobotiqFTSensorHardwareZombie"
+         type="robotiq_ft_sensor_hardware_zombie::RobotiqFTSensorHardwareZombie"
+         base_class_type="hardware_interface::SensorInterface">
+    <description>
+      ros2_control hardware interface.
+    </description>
+  </class>
+</library>

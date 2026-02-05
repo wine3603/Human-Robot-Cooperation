@@ -1,0 +1,41 @@
+<mujoco model="pr2_scene">
+  <include file="robot_pr2.xml"/>
+
+  <asset>
+    <texture type="skybox" file="meshes/desert.png" gridsize="3 4" gridlayout=".U..LFRB.D.." />
+    <texture name="plane" type="2d" builtin="checker" rgb1=".2 .3 .4" rgb2=".3 .4 .5" width="512" height="512" mark="cross" markrgb=".8 .8 .8" />
+    <material name="plane" reflectance="0.3" texture="plane" texrepeat="1 1" texuniform="true" />
+    <material name="wood" rgba="0.6 0.4 0.2 1"/>
+    <material name="white" rgba="1 1 1 1"/>    
+  </asset>
+
+
+  <worldbody>
+    <light directional="true" pos="0 0 30" dir="0 -0.5 -1"/>
+
+    <geom name="floor" pos="0 0 0" size="0 0 .25" type="plane" material="plane" condim="3" solref="0.001 0.01" solimp="0.9 0.95 0.001"/>
+
+    <body name="table/base_link" pos="-3.0 0.0 0.8" quat="0.7071 0 0 0.7071">
+      <freejoint/>
+      <body name="table"/>
+      <geom name="table_top" type="box" size="0.60 0.3 0.005" pos="0 0 -0.005"  contype="1" conaffinity="1" mass="4.8" material="wood"/>
+
+
+      <geom name="leg_fl" type="cylinder" size="0.025 0.395" pos="0.55 0.25 -0.40" material="white" mass="0.5"/>
+      <geom name="leg_fr" type="cylinder" size="0.025 0.395" pos="0.55 -0.25 -0.40" material="white" mass="0.5"/>
+      <geom name="leg_rl" type="cylinder" size="0.025 0.395" pos="-0.55 0.25 -0.40" material="white" mass="0.5"/>
+      <geom name="leg_rr" type="cylinder" size="0.025 0.395" pos="-0.55 -0.25 -0.40" material="white" mass="0.5"/>
+      <geom name="frame_long_front" type="box" size="0.55 0.015 0.015" pos="0 0.25 -0.04" material="white" mass="1.0"/>
+      <geom name="frame_long_back" type="box" size="0.55 0.015 0.015" pos="0 -0.25 -0.04" material="white" mass="1.0"/>
+      <geom name="frame_short_left" type="box" size="0.015 0.25 0.015" pos="0.585 0 -0.025" material="white" mass="0.5"/>
+      <geom name="frame_short_right" type="box" size="0.015 0.25 0.015" pos="-0.585 0 -0.025" material="white" mass="0.5"/>
+    </body>
+  </worldbody>
+
+  <sensor>
+    <framepos name='desk/base_pos' objtype='body' objname='table' />
+    <framequat name='desk/base_quat' objtype='body' objname='table' />
+  </sensor>
+
+</mujoco>
+

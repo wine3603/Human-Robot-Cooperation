@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- 用你现成的宏 -->
+  <xacro:include filename="$(find pr2_description)/urdf/joint_macros.xacro"/>
+
+  <ros2_control name="PR2MujocoSystem" type="system">
+    <hardware>
+      <plugin>pr2_mujoco_hardware/Pr2MujocoHardware</plugin>
+      <param name="domain">1</param>
+			<param name="network_interface">lo</param>
+    </hardware>
+
+    <!-- ====================== Mujoco actuator 顺序（严格对齐） ====================== -->
+
+    <!-- 2.1 gripper + head + laser (position) -->
+    <xacro:pr2_position_joint joint_name="l_gripper_l_finger_joint"/>
+    <xacro:pr2_position_joint joint_name="r_gripper_l_finger_joint"/>
+    <xacro:pr2_position_joint joint_name="head_pan_joint"/>
+    <xacro:pr2_position_joint joint_name="head_tilt_joint"/>
+    <xacro:pr2_position_joint joint_name="laser_tilt_mount_joint"/>
+
+    <!-- 2.2 caster steer (position) -->
+    <xacro:pr2_position_joint joint_name="fl_caster_rotation_joint"/>
+    <xacro:pr2_position_joint joint_name="fr_caster_rotation_joint"/>
+    <xacro:pr2_position_joint joint_name="bl_caster_rotation_joint"/>
+    <xacro:pr2_position_joint joint_name="br_caster_rotation_joint"/>
+
+    <!-- 2.3 wheel velocity (velocity) -->
+    <xacro:pr2_velocity_joint joint_name="fl_caster_l_wheel_joint"/>
+    <xacro:pr2_velocity_joint joint_name="fl_caster_r_wheel_joint"/>
+    <xacro:pr2_velocity_joint joint_name="fr_caster_l_wheel_joint"/>
+    <xacro:pr2_velocity_joint joint_name="fr_caster_r_wheel_joint"/>
+    <xacro:pr2_velocity_joint joint_name="bl_caster_l_wheel_joint"/>
+    <xacro:pr2_velocity_joint joint_name="bl_caster_r_wheel_joint"/>
+    <xacro:pr2_velocity_joint joint_name="br_caster_l_wheel_joint"/>
+    <xacro:pr2_velocity_joint joint_name="br_caster_r_wheel_joint"/>
+
+    <!-- 2.4 torso lift (effort) -->
+    <xacro:pr2_effort_joint joint_name="torso_lift_joint"/>
+
+    <!-- 2.5 right arm (effort x7) -->
+    <xacro:pr2_effort_joint joint_name="r_shoulder_pan_joint"/>
+    <xacro:pr2_effort_joint joint_name="r_shoulder_lift_joint"/>
+    <xacro:pr2_effort_joint joint_name="r_upper_arm_roll_joint"/>
+    <xacro:pr2_effort_joint joint_name="r_elbow_flex_joint"/>
+    <xacro:pr2_effort_joint joint_name="r_forearm_roll_joint"/>
+    <xacro:pr2_effort_joint joint_name="r_wrist_flex_joint"/>
+    <xacro:pr2_effort_joint joint_name="r_wrist_roll_joint"/>
+
+    <!-- 2.6 left arm (effort x7) -->
+    <xacro:pr2_effort_joint joint_name="l_shoulder_pan_joint"/>
+    <xacro:pr2_effort_joint joint_name="l_shoulder_lift_joint"/>
+    <xacro:pr2_effort_joint joint_name="l_upper_arm_roll_joint"/>
+    <xacro:pr2_effort_joint joint_name="l_elbow_flex_joint"/>
+    <xacro:pr2_effort_joint joint_name="l_forearm_roll_joint"/>
+    <xacro:pr2_effort_joint joint_name="l_wrist_flex_joint"/>
+    <xacro:pr2_effort_joint joint_name="l_wrist_roll_joint"/>
+
+  </ros2_control>
+
+</robot>

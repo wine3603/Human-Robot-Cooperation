@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>moying_mcr_hardware_zombie</name>
+  <version>0.0.0</version>
+  <description>hardware interface for mcr</description>
+  <maintainer email="wobudajianpan@gmail.com">Jianming Yao</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>hardware_interface</depend>
+
+  <depend>pluginlib</depend>
+
+  <depend>rclcpp</depend>
+
+  <depend>moying_mcr_hardware</depend>
+
+  <depend>moying_mcr_arm_dynamics_models</depend>
+
+  <depend>elfin_ethercat_driver_zombie</depend>
+
+  <depend>rclcpp_lifecycle</depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
