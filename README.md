@@ -7,10 +7,10 @@
 
 ## 📖 Introduction
 
-The project validates the algorithms across three different hardware/simulation platforms:
+The project validates the HRC Transportation simulation (MuJoCo physics simulation validation) across three different Mobile Robot platforms:
 1.  **Moying Mobile Manipulator** 
 2.  **PR2 Robot** 
-3.  **Unitree mujoco** (MuJoCo physics simulation validation)
+3.  **Moying Dual-Arm Robot**
 
 ## 📂 Repository Structure
 
