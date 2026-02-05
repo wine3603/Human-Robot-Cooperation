@@ -5,14 +5,14 @@
 ![ROS Version](https://img.shields.io/badge/ROS-humble-blue)
 ![Simulation](https://img.shields.io/badge/MuJoCo-Physics-orange)
 
-## 📖 Introduction (项目简介)
+## 📖 Introduction
 
 The project validates the algorithms across three different hardware/simulation platforms:
 1.  **Moying Mobile Manipulator** 
 2.  **PR2 Robot** 
 3.  **Unitree mujoco** (MuJoCo physics simulation validation)
 
-## 📂 Repository Structure (目录结构)
+## 📂 Repository Structure
 
 This repository is organized into three distinct workspaces:
 
