@@ -1,4 +1,4 @@
-# [IROS demo]
+# Human-Robot Cooperative Heavy Payload Manipulation
 
 
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
